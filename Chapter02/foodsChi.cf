@@ -1,0 +1,14 @@
+Pred.      Comment ::= Item "很" Quality
+This.      Item    ::= "这" Kind
+That.      Item    ::= "那" Kind
+Mod.       Kind    ::= Kind Quality
+Wine.      Kind    ::= "酒"
+Cheese.    Kind    ::= "乳酪"
+Fish.      Kind    ::= "鱼"
+Very.      Quality ::= "很" Quality
+Fresh.     Quality ::= "新鲜"
+Warm.      Quality ::= "暖"
+Italian.   Quality ::= "意大利式"
+Expensive. Quality ::= "贵"
+Delicious. Quality ::= "美味"
+Boring.    Quality ::= "无味"
