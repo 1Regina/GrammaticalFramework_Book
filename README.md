@@ -1,7 +1,7 @@
 Notes and Exercises to Grammatical FrameworkA Programming Language for Multilingual Grammars and Their Applications by Aarne Ranta September 8, 2010
 
-* <<FOOD>>  << Chapter 02>>
 Commands run after 
+* <<FOOD>>  << Chapter 02>>
 1. i foodsEng.cf or foodsIta.cf or foodsChi.cf
    1. gr
    2. gt
