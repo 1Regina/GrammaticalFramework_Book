@@ -17,4 +17,4 @@ Boring.    Quality ::= "boring"
 -- Extra
 The.       Item    ::= "the" Kind
 Fruit.     Kind    ::= "fruit"
-Juicy.     Quality ::= "juicy" 
+Juicy.     Quality ::= "juicy" ;

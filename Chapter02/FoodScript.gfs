@@ -1,0 +1,7 @@
+import FoodEng.gf FoodIta.gf
+gr Pred (This ?) ? | l -treebank
+gr Pred (That ?) ? | l -treebank
+
+gr Pred (This (With (Mod (Very (Very ?)) (Mod (Very ?) ?)) (With (Mod ? ?) (With ? (Kind2C ?))))) (Very ?) | l -treebank
+
+-- (type in)  gf < FoodScript.gfs
