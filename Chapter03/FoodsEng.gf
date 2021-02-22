@@ -17,7 +17,7 @@ concrete FoodsEng of Foods = {
         Pizza = regNoun "pizza" ;
         
         -- Ex3-2
-        Fly = flynoun "fly" "fly"; 
+        Fly = flynoun "fly" "flies"; 
 
         Very a = {s = "very" ++ a.s} ;
         Fresh = adj "fresh" ;
