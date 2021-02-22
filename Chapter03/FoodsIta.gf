@@ -21,7 +21,11 @@ concrete FoodsIta of Foods = open ResIta in {
                 s = table {n => kind.s ++ qual.s ! kind.g ! n}
                 g = kind.g
                 } ;  -}
-        Wine = noun "vino" "vini" Masc ;
+        -- Wine = noun "vino" "vini" Masc ;
+        --Ex 3.2 on wine inflection table
+        Wine = 
+            { s = table { Sg => "vino"; Pl => "vini" }};
+
         Cheese = noun "formaggio" "formaggi" Masc ;
         Fish = noun "pesce" "pesci" Masc ;
         Pizza = noun "pizza" "pizze" Fem ;
