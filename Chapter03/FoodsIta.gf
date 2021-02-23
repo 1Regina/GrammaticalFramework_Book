@@ -16,9 +16,9 @@ concrete FoodsIta of Foods = open ResIta in {
             s = \\n => kind.s ! n ++ quality.s ! kind.g ! n ;
             g = kind.g
             } ;
-        --Alternative
+        --Alternative in desugared form
         {-Mod quality kind = {
-                s = table {n => kind.s ++ qual.s ! kind.g ! n}
+                s = table {n => kind.s ! n ++ qual.s ! kind.g ! n}
                 g = kind.g
                 } ;  -}
         -- Wine = noun "vino" "vini" Masc ;

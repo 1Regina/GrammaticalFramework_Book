@@ -49,3 +49,15 @@ Commands run after
    2. ```gr -number=3```
 
 8. use a script in terminal outside of gf with ```gf < FoodScript.gfs```
+
+* << Chapter 03>>
+1. test inflection table with param and oper
+   1.  ```i -retain FoodsEng.gf``` 
+   2.  ```cc flynoun "fly"```
+   3.  ```l -table Wine```
+   4.  gf F
+   5.  ```i -retain BooleanE3.gf``` Using i -retain bcos we are using param and oper
+   6.  ```cc ConDisjunct ! True ! True``` NB: ```!``` bcos we are using a table so need to select input argument
+   7.  ```cc ConDisjunctStr ! True ! True```
+   8.  ```cc ConDisjuncStrSugarTbl ! True! True```
+   9.  ``` cc ConDisjuncBoolSugarTbl ! False ! True ```

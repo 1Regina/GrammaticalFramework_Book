@@ -11,7 +11,7 @@ concrete FoodsEng of Foods = {
         Those = det Pl "those" ;
         Mod quality kind =
             {s = \\n => quality.s ++ kind.s ! n} ;
-        Wine = regNoun "wine" ;C
+        Wine = regNoun "wine" ;
         Cheese = regNoun "cheese" ;
         Fish = noun "fish" "fish" ;
         Pizza = regNoun "pizza" ;
@@ -34,9 +34,17 @@ concrete FoodsEng of Foods = {
                 \n,det,noun -> {s = det ++ noun.s ! n ; n = n} ;
         noun : Str -> Str -> {s : Number => Str} =
             \man,men -> {s = table {Sg => man ; Pl => men}} ;
+
         --Ex 3-2
         flynoun : Str  -> {s : Number => Str} = 
-            \fly, flies -> {s = table { Sg => "fly"; Pl => "flies"}};
+            \fly ->
+            
+            let flies : Str = case fly of {
+               fl + "y"        => fl + "ies";
+               _               => fly + "s"     
+            }
+                 
+            in {s = table { Sg => fly; Pl => flies}};
         --Ex 3-2 alternative with given param Number and oper noun
         {-Noun : Type = { s: Number => Str};
         mkNoun : Str -> Str -> Noun = \x, y ->
@@ -47,13 +55,7 @@ concrete FoodsEng of Foods = {
                     }
             };
 
-        flynoun : Str -> flynoun = \w ->
-            let :
-                ws : Str = case w of {
-                x + "y"         => x + "ies";
-                _               => w + "s"    
-                }
-            in mkNoun w ws     ; -}      
+        -}    
 
         regNoun : Str -> {s : Number => Str} =
             \car -> noun car (car + "s") ;
