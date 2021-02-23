@@ -14,7 +14,7 @@ Delicious. Quality ::= "delicious"
 Boring.    Quality ::= "boring"
 
 
--- Extra
+-- Extra. Inari check that this is correct. but cannot run maybe due to some bug.
 The.       Item    ::= "the" Kind
 Fruit.     Kind    ::= "fruit"
-Juicy.     Quality ::= "juicy" ;
+Juicy.     Quality ::= "juicy" 
