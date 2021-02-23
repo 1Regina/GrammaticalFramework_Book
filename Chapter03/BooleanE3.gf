@@ -41,7 +41,7 @@ oper
     } ; -}
 
 
--- Method 2: with Str
+-- Method 2: Output Str instead of Bool
     ConDisjunctStr : Bool => Bool => Str =
         table {
             True  => table {
@@ -53,7 +53,7 @@ oper
             };
 
            
-    -- Method 3: Separate table with Str as output type for Conjuctive vs Disjunctive
+    -- Method 3: Separate case expression table with Str as output type for Conjuctive vs Disjunctive
     
     {-inari hint
         -- fun : typ1   -> typ2 -> returntyp = \t1,t2 ->
@@ -73,7 +73,7 @@ oper
             <False, True >  => "False"  -- False, True
         };
 
-    -- Method 4: Separate table with Bool as output type for Conunctive vs Disjunctive
+    -- Method 4: Separate case expression table with Bool as output type for Conunctive vs Disjunctive
     ConDisjuncBoolSugarTbl: Bool => Bool => Bool =
         \\bool1, bool2 => case < bool1, bool2>  of {
             <True, True  >  => True;  -- True, True
