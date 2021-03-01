@@ -31,6 +31,11 @@ concrete FoodsIta of Foods = open ResIta in {
         Pizza = noun "pizza" "pizze" Fem ;
         Very qual =
             {s = \\g,n => "molto" ++ qual.s ! g ! n} ;
+        -- Alternative in desugared form
+        {-Very qual = {
+            s = table { g, n => "molto" ++ qual.s ! g ! n}
+        };  -}
+
         Fresh =
             adjective "fresco" "fresca" "freschi" "fresche" ;
         Warm = regAdj "caldo" ;

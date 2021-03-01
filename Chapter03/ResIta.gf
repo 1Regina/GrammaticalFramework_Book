@@ -20,15 +20,15 @@ resource ResIta = open Prelude in {
                 s = table {Sg => vino ; Pl => vini} ;
                 g = g
             } ;
-        adjective :
-            (nero,nera,neri,nere : Str) -> Adjective =
+        adjective : -- see pg 60 for explanation
+            (nero,nera,neri,nere : Str) -> Adjective = 
                 \nero,nera,neri,nere -> {
                     s = table {
                         Masc => table {Sg => nero ; Pl => neri} ;
                         Fem => table {Sg => nera ; Pl => nere}
                         }
                 } ;
-        regAdj : Str -> Adjective = \nero ->
+        regAdj : Str -> Adjective = \nero ->   -- see pg 60 for explanation
             let ner : Str = init nero
             in
             adjective nero (ner+"a") (ner+"i") (ner+"e") ;
