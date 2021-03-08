@@ -1,0 +1,1 @@
+abstract Shopping = Foods, Clothes  ; 

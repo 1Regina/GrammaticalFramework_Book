@@ -1,0 +1,10 @@
+digraph {
+Shopping [ style = "solid", shape = "box" ]
+Clothes [ style = "solid", shape = "box" ]
+Foods [ style = "solid", shape = "box" ]
+Comments [ style = "solid", shape = "box" ]
+Shopping -> Foods [ style = "solid" ]
+Shopping -> Clothes [ style = "solid" ]
+Clothes -> Comments [ style = "solid" ]
+Foods -> Comments [ style = "solid" ]
+}
