@@ -2,13 +2,21 @@ resource ResEng = open Prelude in {
     param
         Number = Sg | Pl;
         Case = Nom | Gen;                 -- for Nominative vs Genitive in Method 3
+        
+        -- Ex 4-2; 4-3
+        VerbForm =
+              VPresent Number
+            | VConti  
+            | VPast
+            | VPresPart
+            | VPastPart         ;
+
     oper
         NounPhrase = Type =
             {s : Str ; n : Number};
         Noun : Type = { s : Number => Str };
         Adjective : Type = { s : Str};
-
-
+ 
     -- det refers to This and Those 
         det : Number -> Str ->
             {s : Number => Str} -> {s : Str ; n : Number} =
@@ -50,7 +58,7 @@ resource ResEng = open Prelude in {
                 x + "y"                            => x + "ies" ; -- fly
                 _                                  => w + "s"     -- car 
                 }
-        in w ws   ;                                          
+        in mkNoun w ws   ;                                          
 
         
         -- Method 3 Noun for Nom & Gen
@@ -72,7 +80,7 @@ resource ResEng = open Prelude in {
 
         regNounNomGen : Str -> NounNomGen = \x -> mkNounNomGen x (x + "s"); -- Simple
 
-        -- complex nouns. with argu1 : Number ; argu2: noun; argu3: Nom | Gen
+        -- complex nouns. with argu1 : Number ; argu2: noun; argu3: Nom | Gen?
         regNounNomGen : Str -> Str -> NounNomGen = \x, y -> {
             s = table {
                 Sg => table {
@@ -83,15 +91,15 @@ resource ResEng = open Prelude in {
                      Nom => y ;            
                      Gen => case y of {  
             
-                _ + ("a" | "e" | "i"  | "o") + "o" => w + "s'"   ; -- bamboo
-                _ + ("s" | "x" | "sh" | "o" )      => w + "es'"  ; -- bus, hero
-                _ + "z"                            => w + "zes'" ; -- quiz
-                _ + ("a" | "e" | "o" | "u" ) + "y" => w + "s'"   ; -- boy
-                _ + ("hild")                       => w + "ren's"; -- child
-                x + "y"                            => x + "ies'" ; -- fly
-                _                                  => w + "s'"     -- car 
+                _ + ("a" | "e" | "i"  | "o") + "o"        => w + "s'"   ; -- bamboo
+                _ + ("s" | "x" | "che"| "sh" | "o" )      => w + "es'"  ; -- bus, hero
+                _ + "z"                                   => w + "zes'" ; -- quiz
+                _ + ("a" | "e" | "o" | "u" ) + "y"        => w + "s'"   ; -- boy
+                _ + ("hild")                              => w + "ren's"; -- child
+                x + "y"                                   => x + "ies'" ; -- fly
+                _                                         => w + "s'"     -- car 
                 }
-        in w ws   ;  
+        in mkNounNomGen w ws   ;  
 
 
         -- For all and any
@@ -100,7 +108,38 @@ resource ResEng = open Prelude in {
         copula : Number => Str =
             table {Sg => "is" ; Pl => "are"} ; 
 
-
+        -- Ex4-2 & Ex4-3      
+        regVerb : Str -> {s : VerbForm => Str} =
+            \talk -> {
+                s = table {
+                    VPresent Sg     => talk + "s"    ;
+                    VPresent Pl     => talk          ;
+                    VConti          => talk + "ing"  ;
+                    _               => talk + "ed"   
+                }
+            }; 
+           
+        allVerb : Str -> {s : VerbForm => Str} =
+            \verb -> {
+                s = table {
+                    VPresent Sg     => case x of {
+                                    _ + "y"        = verb + "ies"  ; -- try/ cry    
+                                    _             = verb + "s"  
+                    };
+                    verb  + "s"   ;
+                    VPresent Pl     => verb          ;
+                    VConti          => verb + "ing"  ;
+                    VPast           => case x of {
+                                    dr + "in" + nk = dr + "an" + nk ; -- sing/drink
+                                    _ + "y"        = verb + "ied" ; -- try/ cry
+                                    _              = verb + "ed"  
+                                    };
+                    _               => case x of {
+                                    dr + "in" + nk = dr + "un" + nk ; -- sing/drink
+                                    _ + "y"        = verb + "ied"  ; -- try/ cry
+                                    _              = _ + "ed"  
+                                    }
+        }; 
 
 
 }
