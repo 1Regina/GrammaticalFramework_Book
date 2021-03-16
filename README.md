@@ -71,31 +71,33 @@ Commands run after
       3. Note the difference between CompAP vs CompAPW regarding when
    2. Discont : Add Now, Already and CompAPW
    3. Run ```  gr DeclCl (PredVP John (CompAPW ? ? ))```
-4. Cannot i FoodsIta.gf even though they are copied from textbook.
-5. Can we walk thru the oper meaning in ResIta.gf. P90. Dont understand why (nero,nera,neri,nere : Str) -> Adjective =  can be wildcard since they are used again.
-6. desugar of Very qual in FoodsIta. correct?
+4. Cannot i FoodsIta.gf even though they are copied from textbook. (Bcos ResIta shows that noun also need a gender. Fixed by adding g = masc in FoodsIta.gf to wine)
+5. Can we walk thru the oper meaning in ResIta.gf. P90. Dont understand why (nero,nera,neri,nere : Str) -> Adjective =  can be wildcard since they are used again. (Explanation: ResIta line 24 can be wildcard n1,_,_,n4 or as it is to make it clearer see Function Types with Variable in tutorial http://www.grammaticalframework.org/doc/tutorial/gf-tutorial.html#toc60 but the line 25 should be named.)
+6. desugar of Very qual in FoodsIta. correct? (Fixed. need to add another nested table. See extra alternative)
 7. <Ch04>
-8. how should i read ResEng.gf oper det
-9.  resEng Mth 1 and Mth 2 correct and concept
-10. do i need to ensure the same oper name exist for ResEng and ResIta?
-11. resEng : what does the w and ws in regNoun stand for. LHS or RHS? 
-12. With resource FoodEng, why do i still need a abstract Food ..comparing agst BooleanE3
-13. See regNounNomGen for complex Noun in ResEng.gf Should it be 2 or 3 arguments < Str -> Str -> Str -> regNounNomGen
-14. Is my case expression in table for allVerb in ResEng.gf correct? if yes, i can get rid of regVerb correct?
-15. UmlautE4 syntax error
-16. OverloadEng - need to take care of all 5 scenarios in irregVerb for PresentPl altho no modification eg sing -> sing since  "in worstCaseVerb sings sing singing sang sung ;" last line has 5 arguments.    
-17. OverloadEng - syntax error  
-18. Commands to run to get dependency graph to show module structures
+8. how should i read ResEng.gf oper det. Take 3 arguments and return These Fishes e.g . See the replacement codes and notes. 
+9.  resEng Mth 1 and Mth 2 correct and concept. (Correct)
+10. do i need to ensure the same oper name exist for ResEng and ResIta? Nope dont need. https://inariksit.github.io/gf/2021/02/15/rgl-api-core-extensions.html
+11. resEng : what does the w and ws in regNoun stand for. LHS or RHS? . 
+    (Explanation: regNoun "boy" calls mkNoun function with the arguments. w = "boy" and ws = "boys")
+1.  With resource FoodEng, why do i still need a abstract Food ..comparing agst BooleanE3. (Correct. See Inari rgl-tutorial https://github.com/inariksit/rgl-tutorial)
+2.  See regNounNomGen for complex Noun in ResEng.gf Should it be 2 or 3 arguments < Str -> Str -> Str -> regNounNomGen. (Code is now changed and updated. Old is deleted.)
+3.  Is my case expression in table for allVerb in ResEng.gf correct? if yes, i can get rid of regVerb correct?
+4.  UmlautE4 syntax error
+5.  OverloadEng - need to take care of all 5 scenarios in irregVerb for PresentPl altho no modification eg sing -> sing since  "in worstCaseVerb sings sing singing sang sung ;" last line has 5 arguments.    
+6.  OverloadEng - syntax error  
+7.  Commands to run to get dependency graph to show module structures
     1.  i -retain Shopping.gf
     2.  dependency_graph   << or use dg for abbreviation >> 
     3.  ! dot -Tpng _gfdepgraph.dot >diamond.png
-19. more question : p108 4.14 prefix oper in OverloadEng pre { } why the yellow syntax colour comes on is bcos pre { } is missing type with case pre of  etc
-20. Notes: p109 Tokens can be created in the following ways: 
+8.  more question : p108 4.14 prefix oper in OverloadEng pre { } why the yellow syntax colour comes on is bcos pre { } is missing type with case pre of  etc
+9.  Notes: p109 Tokens can be created in the following ways: 
     1.  quoted string; "foo"
     2.  gluing: t + s
     3.  predefiined operations: init, tail, tk, dp
     4.  pattern matching over strings: "y" => "ies"
     5.  prefix-dependent choices: pre { ..}
+10. prefix.gf to discuss  Meng question
 21.<Ch05>
    1. Read again of the Resource Grammar Library at S5.4 p115, 116 for notes.
    2. ? Should FoodsRGLEng be linked with Ch04 ResEng.gf
@@ -106,3 +108,4 @@ Commands run after
       4. gr Mod ? ?
       5. gr Mod
       6. gt | l -treebank
+   4. Ex 5-1 FoodsRIta.gf concrete but without flag startcat? (bcos FoodsREng.gf in p121 is missing flag startcat).

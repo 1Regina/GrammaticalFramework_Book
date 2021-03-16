@@ -24,17 +24,29 @@ concrete FoodsIta of Foods = open ResIta in {
         -- Wine = noun "vino" "vini" Masc ;
         --Ex 3.2 on wine inflection table
         Wine = 
-            { s = table { Sg => "vino"; Pl => "vini" }};
+            { s = table { Sg => "vino"; Pl => "vini" };
+            g = Masc};
+  
 
         Cheese = noun "formaggio" "formaggi" Masc ;
         Fish = noun "pesce" "pesci" Masc ;
         Pizza = noun "pizza" "pizze" Fem ;
+        
         Very qual =
             {s = \\g,n => "molto" ++ qual.s ! g ! n} ;
         -- Alternative in desugared form
         {-Very qual = {
-            s = table { g, n => "molto" ++ qual.s ! g ! n}
-        };  -}
+            s = table { g => table { n => "molto" ++ qual.s ! g ! n}}
+        };-}  
+        
+        -- Alternative 2 with less sugar 
+        -- Very qual =  table {
+        --                     Fem => table {
+        --                         Sg => "molto" ++ qual.s ! Fem ! Sg ;
+        --                         Pl => "molto" ++ qual.s ! Fem ! Pl} ;
+        --                     Masc => table {
+        --                         Sg => "molto" ++ qual.s ! Masc ! Sg ;
+        --                         Pl => "molto" ++ qual.s ! Masc ! Pl}};
 
         Fresh =
             adjective "fresco" "fresca" "freschi" "fresche" ;

@@ -12,15 +12,16 @@ resource ResEng = open Prelude in {
             | VPastPart         ;
 
     oper
-        NounPhrase = Type =
+        NounPhrase : Type =
             {s : Str ; n : Number};
         Noun : Type = { s : Number => Str };
         Adjective : Type = { s : Str};
  
-    -- det refers to This and Those 
+    -- det refers to This and Those and in here, it is used as a function bcos of needing 3 arguments.
         det : Number -> Str ->
-            {s : Number => Str} -> {s : Str ; n : Number} =
-                \n,det,noun -> {s = det ++ noun.s ! n ; n = n} ;
+            {- {s : Number => Str} -> {s : Str ; n : Number} replace it with this for easier understanding -}
+             Noun -> NounPhrase =
+                \number,det,noun -> {s = det ++ noun.s ! number ; n = number} ;
 
         
         
@@ -32,7 +33,7 @@ resource ResEng = open Prelude in {
                _               => fly + "s"     
             }
                  
-            in {s = table { Sg => fly; Pl => flies}};
+            in mkNoun fly flies ; {- with using mkNoun function -} -- alternative {s = table { Sg => fly; Pl => flies}};
 
         -- Method 2:  From GF Tutorial Lesson_3 Smarter Paradigns (https://github.com/1Regina/GrammaticalFramework_tutorial/blob/master/lesson_3/SmarterParadigms.gf)
         Noun : Type = {s : Number => Str} ; 
@@ -63,7 +64,8 @@ resource ResEng = open Prelude in {
         
         -- Method 3 Noun for Nom & Gen
         NounNomGen : Type = {s : Number => Case => Str} ;
-        mkNounNomGen : Str -> Str -> NounNomGen = \x,y -> {
+{--     mkNounNomGen is also below. Choose one.
+           mkNounNomGen : Str -> Str -> NounNomGen = \x,y -> {
             s = table {
                 Sg => table {
                     Nom => x ;
@@ -77,29 +79,26 @@ resource ResEng = open Prelude in {
                     }
                 }
             } ;
-
+--}
         regNounNomGen : Str -> NounNomGen = \x -> mkNounNomGen x (x + "s"); -- Simple
 
+
         -- complex nouns. with argu1 : Number ; argu2: noun; argu3: Nom | Gen?
-        regNounNomGen : Str -> Str -> NounNomGen = \x, y -> {
+        mkNounNomGen : Str -> Str -> NounNomGen = \nomSg, nomPl -> {
             s = table {
                 Sg => table {
-                    Nom => x; 
-                    Gen => x + "'s"
+                    Nom => nomSg; 
+                    Gen => nomSg + "'s"
                     };
                  Pl => table {
-                     Nom => y ;            
-                     Gen => case y of {  
-            
-                _ + ("a" | "e" | "i"  | "o") + "o"        => w + "s'"   ; -- bamboo
-                _ + ("s" | "x" | "che"| "sh" | "o" )      => w + "es'"  ; -- bus, hero
-                _ + "z"                                   => w + "zes'" ; -- quiz
-                _ + ("a" | "e" | "o" | "u" ) + "y"        => w + "s'"   ; -- boy
-                _ + ("hild")                              => w + "ren's"; -- child
-                x + "y"                                   => x + "ies'" ; -- fly
-                _                                         => w + "s'"     -- car 
+                     Nom => nomPl ;            
+                     Gen => case nomPl of {  
+                         _ + ("s")  => nomPl + "'" ;-- cars
+                         _          => nomPl + "'s" }-- children
+                    }
                 }
-        in mkNounNomGen w ws   ;  
+            };
+        
 
 
         -- For all and any
@@ -122,23 +121,24 @@ resource ResEng = open Prelude in {
         allVerb : Str -> {s : VerbForm => Str} =
             \verb -> {
                 s = table {
-                    VPresent Sg     => case x of {
-                                    _ + "y"        = verb + "ies"  ; -- try/ cry    
-                                    _             = verb + "s"  
-                    };
-                    verb  + "s"   ;
+                    VPresent Sg     => case verb of {
+                                    _ + "y"       => verb + "ies"  ; -- try/ cry    
+                                    _             => verb + "s"  
+                                    };
+                    -- verb  + "s"   ;
                     VPresent Pl     => verb          ;
                     VConti          => verb + "ing"  ;
-                    VPast           => case x of {
-                                    dr + "in" + nk = dr + "an" + nk ; -- sing/drink
-                                    _ + "y"        = verb + "ied" ; -- try/ cry
-                                    _              = verb + "ed"  
+                    VPast           => case verb of {
+                                    dr + "in" + nk => dr + "an" + nk ; -- sing/drink
+                                    _ + "y"        => verb + "ied" ; -- try/ cry
+                                    _              => verb + "ed"  
                                     };
-                    _               => case x of {
-                                    dr + "in" + nk = dr + "un" + nk ; -- sing/drink
-                                    _ + "y"        = verb + "ied"  ; -- try/ cry
-                                    _              = _ + "ed"  
+                    _               => case verb of {
+                                    dr + "in" + nk => dr + "un" + nk ; -- sing/drink
+                                    _ + "y"        => verb + "ied"  ; -- try/ cry
+                                    _              => verb + "ed"  
                                     }
+                    }
         }; 
 
 
