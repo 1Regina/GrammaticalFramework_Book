@@ -24,10 +24,22 @@ resource OverloadEng = {
         Verb        : Type = { s :  VerbForm => Str } ;
 
         regVerb : (walk : Str) -> Verb = \walk ->
-            let walked : Str = case walk of {
-                _ + #vowel => walked + "d" ; -- waste + d
-                _          => walk  + "ed"  
-                }
+            let --ßwallked : Str = case walk of {
+                -- _ + #vowel => walked + "d" ; -- waste + d
+                -- _          => walk  + "ed"  
+                -- }
+                -- Past & Participle
+                walked : Str = case walk of {
+                    _   + #vowel                => walk + "d" ; -- waste/ code + d
+                    tr  + "y"                   => tr   + "ied" ; -- try / cry 
+                    _                           => walk + "ed"
+                } ;
+
+                -- -- Participle
+                -- sung : Str = case walk of {
+                --     tr + "y"                    => tr   + "ied"  ; -- try / cry
+                --     _                           => walk + "ed"   
+                --ß}
             in irregVerb walk walked walked ;
 
         irregVerb : (sing, sang, sung : Str) -> Verb = \sing, sang, sung -> 
@@ -41,26 +53,17 @@ resource OverloadEng = {
                 } ;
 
                 -- PresentPl
-                sing -> sing ;
+                -- sing -> sing ;
 
                 -- Continuous
                 singing : Str = case sing of {
                     saddl + "e"                 => saddl        + "ing" ; -- saddling
+                    si    + "ng"                => sing         + "ing" ; -- singing   
                     qui   + z@#consonant        => qui + z + z  + "ing" ;  -- quizzing / installing
                     _                           => sing         + "ing"      
                 } ; 
 
-                -- Past
-                sang : Str = case sing of {
-                    tr  + "y"                   => tr   + "ied" ; -- try / cry 
-                    _                           => sing + "ed"
-                } ;
 
-                -- Participle
-                sung : Str = case sing of {
-                    tr + "y"                    => tr   + "ied"  ; -- try / cry
-                    _                           => sing + "ed"   
-                }
             in worstCaseVerb sings sing singing sang sung ;     
 
 

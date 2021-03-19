@@ -82,25 +82,25 @@ Commands run after
     (Explanation: regNoun "boy" calls mkNoun function with the arguments. w = "boy" and ws = "boys")
 1.  With resource FoodEng, why do i still need a abstract Food ..comparing agst BooleanE3. (Correct. See Inari rgl-tutorial https://github.com/inariksit/rgl-tutorial)
 2.  See regNounNomGen for complex Noun in ResEng.gf Should it be 2 or 3 arguments < Str -> Str -> Str -> regNounNomGen. (Code is now changed and updated. Old is deleted.)
-3.  Is my case expression in table for allVerb in ResEng.gf correct? if yes, i can get rid of regVerb correct?
-4.  UmlautE4 syntax error
-5.  OverloadEng - need to take care of all 5 scenarios in irregVerb for PresentPl altho no modification eg sing -> sing since  "in worstCaseVerb sings sing singing sang sung ;" last line has 5 arguments.    
-6.  OverloadEng - syntax error  
+3.  Is my case expression in table for allVerb in ResEng.gf correct? if yes, i can get rid of regVerb correct? (Yes. allVerb is more comprehensive than the regVerb so keep allVerb, rid regVerb)
+4.  UmlautE4 syntax error (corrected. Use this instead of gf tutorial one. remove "in umlaut at end... and param" dont need since the string are not called again like in ResEng into other functions. Run command ```i -retain UmlautE4.gf``` and then ```cc umlautGalore "boy"``` )
+5.  OverloadEng - need to take care of all 5 scenarios in irregVerb for PresentPl altho no modification eg sing -> sing since  "in worstCaseVerb sings sing singing sang sung ;" last line has 5 arguments.    (Code is updated. Note that PresentPl is taken care of/ passed along in worstCaseVerb. All PresentSg and Continous is taken care of irregVerb. ```i -retain OverloadEng.gf``` and ```cc -trace regVerb "walk"``` and 5 argu for worstCaseVerb)
+6.  OverloadEng - syntax error  (solved)
 7.  Commands to run to get dependency graph to show module structures
     1.  i -retain Shopping.gf
     2.  dependency_graph   << or use dg for abbreviation >> 
     3.  ! dot -Tpng _gfdepgraph.dot >diamond.png
-8.  more question : p108 4.14 prefix oper in OverloadEng pre { } why the yellow syntax colour comes on is bcos pre { } is missing type with case pre of  etc
+8.  more question : p108 4.14 prefix oper in OverloadEng pre { } why the yellow syntax colour comes on is bcos pre { } is missing type with case pre of  etc. (Solved and can load anywhere. Mistaken as Haskell file)
 9.  Notes: p109 Tokens can be created in the following ways: 
     1.  quoted string; "foo"
     2.  gluing: t + s
     3.  predefiined operations: init, tail, tk, dp
     4.  pattern matching over strings: "y" => "ies"
     5.  prefix-dependent choices: pre { ..}
-10. prefix.gf to discuss  Meng question
+10. prefix.gf to discuss  Meng question. (Done. need a table of cases)
 21.<Ch05>
    1. Read again of the Resource Grammar Library at S5.4 p115, 116 for notes.
-   2. ? Should FoodsRGLEng be linked with Ch04 ResEng.gf
+   2. ? Should FoodsRGLEng be linked with Ch04 ResEng.gf. (Ans: After all the hardwork to create ResEng.gf. Use --# -path=../Chapter04/ at top line in FoodsRGLEng.gf)
    3. Ex 5.0 Commands to run
       1. gr
       2. gr Pred ? ? |l
@@ -108,4 +108,4 @@ Commands run after
       4. gr Mod ? ?
       5. gr Mod
       6. gt | l -treebank
-   4. Ex 5-1 FoodsRIta.gf concrete but without flag startcat? (bcos FoodsREng.gf in p121 is missing flag startcat).
+   4. Ex 5-1 FoodsRIta.gf concrete but without flag startcat? (Yes flag startcat is only in abstract files).

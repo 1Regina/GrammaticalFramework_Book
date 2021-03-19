@@ -125,7 +125,7 @@ resource ResEng = open Prelude in {
                                     _ + "y"       => verb + "ies"  ; -- try/ cry    
                                     _             => verb + "s"  
                                     };
-                    -- verb  + "s"   ;
+ 
                     VPresent Pl     => verb          ;
                     VConti          => verb + "ing"  ;
                     VPast           => case verb of {
@@ -134,7 +134,7 @@ resource ResEng = open Prelude in {
                                     _              => verb + "ed"  
                                     };
                     _               => case verb of {
-                                    dr + "in" + nk => dr + "un" + nk ; -- sing/drink
+                                    -- dr + "in" + nk => dr + "un" + nk ; -- sing/drink but bad for think
                                     _ + "y"        => verb + "ied"  ; -- try/ cry
                                     _              => verb + "ed"  
                                     }
