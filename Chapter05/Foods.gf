@@ -17,4 +17,8 @@ abstract Foods = {
         -- 2.8 unambiguous
         With : Kind -> ComplexKind -> ComplexKind; 
         Kind2C : Kind -> ComplexKind; -}
+
+
+        -- Ex 5-5
+        
 }
