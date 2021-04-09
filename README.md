@@ -122,8 +122,7 @@ Commands run after
        1.  import alltenses/LangEng.gfo
        2.  p "this wine is good" returns PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A)))))) NoVoc
        3.  p "is this wine good" returns PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc
-       4.   |    |parsed phrase   | parsed tokens  |   |   |
-            |----|----------------|---|---|---|
-            |  1 | p "this wine is good"   | hrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A)))))) NoVoc  |   |   |
-            |  2 | p "is this wine good"   | PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc  |   |   |
-            |  3 |   |   |   |   |
+            |    |parsed phrase   | parsed tokens  | 
+            |----|----------------|---|
+            |  1 | p "this wine is good"   | hrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A)))))) NoVoc  |
+            |  2 | p "is this wine good"   | PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc  |
