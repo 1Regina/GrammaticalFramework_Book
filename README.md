@@ -121,7 +121,6 @@ Commands run after
 20. Parsing sentences using import alltenses/LangEng.gfo and testing the resource API functions with module TryL (-- a union of SyntaxL, LexiconL and ParadigmsL)
     1.  Ex 5-8 Commands to run in terminal after gf:
        1.  import alltenses/LangEng.gfo
-
 |  | parsed phrase with | parsers |
 | --- | --- | --- |
 | 1 | p "this wine is good" | PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A)))))) NoVoc |
