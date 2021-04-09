@@ -98,31 +98,32 @@ Commands run after
     4.  pattern matching over strings: "y" => "ies"
     5.  prefix-dependent choices: pre { ..}
 14. prefix.gf to discuss  Meng question. (Done. need a table of cases)
-<Ch05>
-   1. Read again of the Resource Grammar Library at S5.4 p115, 116 for notes.
-   2. ? Should FoodsRGLEng be linked with Ch04 ResEng.gf. (Ans: After all the hardwork to create ResEng.gf. Use --# -path=../Chapter04/ at top line in FoodsRGLEng.gf)
-   3. Ex 5-0 + Ex 5-1 Commands to run
+* <Ch05>
+15. Read again of the Resource Grammar Library at S5.4 p115, 116 for notes.
+16. 1. ? Should FoodsRGLEng be linked with Ch04 ResEng.gf. (Ans: After all the hardwork to create ResEng.gf. Use --# -path=../Chapter04/ at top line in FoodsRGLEng.gf)
+    2. Ex 5-0 + Ex 5-1 Commands to run
       1. gr
       2. gr Pred ? ? |l
       3. gr That ? |l
       4. gr Mod ? ?
       5. gr Mod
       6. gt | l -treebank
-   4. Ex 5-2 FoodsRIta.gf concrete but without flag startcat? (Yes flag startcat is only in abstract files). Run command after import ``` gr | l -treebank``` to see both linearized gr and treebank of a gr.
-   5. Ex 5-3 Commands to test Foods grammar with syntax, lexicon and concrete `gf FoodsIChi.gf FoodsIEng.gf FoodsIFin.gf FoodsIGer.gf FoodsIIta.gf`:
+17. Ex 5-2 FoodsRIta.gf concrete but without flag startcat? (Yes flag startcat is only in abstract files). Run command after import ``` gr | l -treebank``` to see both linearized gr and treebank of a gr.
+18. Ex 5-3 Commands to test Foods grammar with syntax, lexicon and concrete `gf FoodsIChi.gf FoodsIEng.gf FoodsIFin.gf FoodsIGer.gf FoodsIIta.gf`:
       1. gr | l -treebank
       2. gt Pred (This Fish) ?
       3. gt Pred ? Delicious
-   6. Q Ex 5-4 is it asking me to do the different LexFoodsLangs and FoodsILangs?
-   7. Q Ex 5-5: Not generalizing FoodsI properly for italian pie. Need oper?
-   8. Ex 5-6: linking ok but what commands to test?
-   9. Q Ex 5-7 word alignment test with `p "this Italian wine is very expensive" | aw`
-   10. p133-135 good case examples of categories in API e.g Det, CN, VP types.
-   11. Ex 5-8 Commands to run in terminal after gf:
+19. 1. Q Ex 5-4 is it asking me to do the different LexFoodsLangs and FoodsILangs?
+    2. Q Ex 5-5: Not generalizing FoodsI properly for italian pie. Need oper?
+    3. Ex 5-6: linking ok but what commands to test?
+    4. Q Ex 5-7 word alignment test with `p "this Italian wine is very expensive" | aw`
+    5.  p133-135 good case examples of categories in API e.g Det, CN, VP types.
+20. Parsing sentences using import alltenses/LangEng.gfo and testing the resource API functions with module TryL (-- a union of SyntaxL, LexiconL and ParadigmsL)
+    1.  Ex 5-8 Commands to run in terminal after gf:
        1.  import alltenses/LangEng.gfo
-       2.  p "this wine is good" returns PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A)))))) NoVoc
-       3.  p "is this wine good" returns PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc
-            |    |parsed phrase   | parsed tokens  | 
-            |----|----------------|---|
-            |  1 | p "this wine is good"   | hrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A)))))) NoVoc  |
-            |  2 | p "is this wine good"   | PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc  |
+       |  | parsed phrase with | parsers |
+       | --- | --- | --- |
+       | 1 | p "this wine is good" | PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A)))))) NoVoc |
+       | 2 | p "is this wine good" | PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc |
+       | 3 | p "he says that this wine is good" | PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron he_Pron) (ComplVS say_VS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))))) NoVoc |
+
