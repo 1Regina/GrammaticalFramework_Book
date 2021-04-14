@@ -120,7 +120,9 @@ Commands run after
     5.  p133-135 good case examples of categories in API e.g Det, CN, VP types.
 20. Parsing sentences using import alltenses/LangEng.gfo and testing the resource API functions with module TryL (-- a union of SyntaxL, LexiconL and ParadigmsL)
     1.  Ex 5-8 Commands to run in terminal after gf:
-       1.  import alltenses/LangEng.gfo
+       1.  import alltenses/LangEng.gfo (then p "is this wine good" . see table below)
+       2.  i -retain alltenses/TryEng.gfo
+               1.  cc -all mkUtt (mkCl this_NP (mkA "cool"))
 
 |  | parsed phrase with | parsers |
 | --- | --- | --- |
@@ -128,8 +130,7 @@ Commands run after
 | 2 | p "is this wine good" | PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc |
 | 3 | p "he says that this wine is good" | PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron he_Pron) (ComplVS say_VS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))))) NoVoc |
 
-       1.  i -retain alltenses/TryEng.gfo
-               1.  cc -all mkUtt (mkCl this_NP (mkA "cool"))
+
 
 
 
