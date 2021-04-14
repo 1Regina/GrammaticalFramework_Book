@@ -128,3 +128,5 @@ Commands run after
 | 2 | p "is this wine good" | PhrUtt NoPConj (UttQS (UseQCl (TTAnt TPres ASimul) PPos (QuestCl (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))) NoVoc |
 | 3 | p "he says that this wine is good" | PhrUtt NoPConj (UttS (UseCl (TTAnt TPres ASimul) PPos (PredVP (UsePron he_Pron) (ComplVS say_VS (UseCl (TTAnt TPres ASimul) PPos (PredVP (DetCN (DetQuant this_Quant NumSg) (UseN wine_N)) (UseComp (CompAP (PositA good_A))))))))) NoVoc |
 
+       2.  i -retain alltenses/TryEng.gfo
+               1.  cc -all mkUtt (mkCl this_NP (mkA "cool"))
