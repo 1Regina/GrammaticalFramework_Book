@@ -134,7 +134,7 @@ Commands run after
 
 21. Ex 5-10. See https://github.com/1Regina/GrammaticalFramework_tutorial/tree/master/lesson_4/functorExMP3
 
-22. ? Ex 6-1 -- error msg "no overload instance of ConstructorsEng.mkCl"
+22. ? Ex 6-1 -- error msg "no overload instance of ConstructorsEng.mkCl" (Chapter 6 can be skipped as outdated similar to the Chapter 5 + 6 in tutorial. Attempted and discussed at https://stackoverflow.com/questions/55883172/grammatical-framework-linearization-type-field-cannot-be-int-how-to-write-a/66653390#66653390)
 
 
 
