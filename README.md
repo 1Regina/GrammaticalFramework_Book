@@ -136,6 +136,15 @@ Commands run after
 
 22. ? Ex 6-1 -- error msg "no overload instance of ConstructorsEng.mkCl" (Chapter 6 can be skipped as outdated similar to the Chapter 5 + 6 in tutorial. Attempted and discussed at https://stackoverflow.com/questions/55883172/grammatical-framework-linearization-type-field-cannot-be-int-how-to-write-a/66653390#66653390)
 
-
-
-
+23. Chapter07:
+    1.  Translator: Copied Foods.gf, FoodsEng.gf, FoodsIta.gf from Chapter03
+        1.  ghc --make -o trans Translator.hs
+        2.  gf -make FoodEng.gf FoodIta.gf
+    2. Query yes no. Application consists of the following:
+| files           | purpose                             |
+| ---             | ---                                 |
+| Makefile        | a makefile                          |
+| Query.gf        | abstract syntax                     |
+| Query???.gf     | concrete syntaxes for each language |
+| Answer.gf       | the question-to-answer function     |
+| QuerySystem.hs  | Haskell Main module                 |
