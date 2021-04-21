@@ -141,6 +141,7 @@ Commands run after
         1.  ghc --make -o trans Translator.hs
         2.  gf -make FoodEng.gf FoodIta.gf
     2. Query yes no. Application consists of the following:
+
 | files           | purpose                             |
 | ---             | ---                                 |
 | Makefile        | a makefile                          |
@@ -148,3 +149,6 @@ Commands run after
 | Query???.gf     | concrete syntaxes for each language |
 | Answer.gf       | the question-to-answer function     |
 | QuerySystem.hs  | Haskell Main module                 |
+
+
+      3. da
