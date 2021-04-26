@@ -137,7 +137,7 @@ Commands run after
 22. ? Ex 6-1 -- error msg "no overload instance of ConstructorsEng.mkCl" (Chapter 6 can be skipped as outdated similar to the Chapter 5 + 6 in tutorial. Attempted and discussed at https://stackoverflow.com/questions/55883172/grammatical-framework-linearization-type-field-cannot-be-int-how-to-write-a/66653390#66653390)
 
 23. Chapter07:
-    1.  Translator: Copied Foods.gf, FoodsEng.gf, FoodsIta.gf from Chapter03
+    1.  ? Translator: Copied Foods.gf, FoodsEng.gf, FoodsIta.gf from Chapter03
         1.  ghc --make -o trans Translator.hs
         2.  gf -make FoodEng.gf FoodIta.gf
     2. Query yes no. Application consists of the following:
@@ -150,5 +150,27 @@ Commands run after
 | Answer.gf       | the question-to-answer function     |
 | QuerySystem.hs  | Haskell Main module                 |
 
-23. continue..
-      3. da
+23. continue
+    3. ? Cannot import QuerySystems.hs properly
+24. Chapter08:
+    1. ? ```p " 2 + 3 * 4"``` and ```p -cat=Exp "2+3*4"``` did not return parser altho linking ok for Calculator.gf
+    * CalculatorC.gf
+    1. ? Ex 8-0  ```infixl``` ```p = Type Prec``` , ```f = Type Str```, ```x, y = Type TermPrec``` and ```EPlus ... EInt  = Type Str```
+    2. ? Ex 8-0 Dont we need to know whats ```nextPrec``` and ```lessPrec```
+    3. ? Ex 8-1 done with ```parenthOpt```
+    4. ? Ex 8-1 with Book Section 6.10```def``` in CalculatorC line 27 and ```ParenthOpt``` in Calculator but cant test  with and without a pipe to ```pt -compute``` can try Ch06 P156 ```parse -tr "1 + 1" | put_tree -compute -tr | linearize```
+    5. Ex 8-2 natural language calculator. Import http://www.grammaticalframework.org/~john/rgl-browser/#!english/NumeralEng and http://www.grammaticalframework.org/~john/rgl-browser/#!abstract/Numeral
+    6. ? Ex 8-2 Should these be added to Calculator.gf from p194
+       1. Section 8-3 Programs with variables
+            ```
+               cat
+                  Prog, Var ;
+               fun
+                  PEmpty : Prog ;
+                  PInit  : Exp -> (Var -> Prog) -> Prog ;
+                  PAss   : Var -> Exp  -> Prog  -> Prog ;
+
+                  EVar   : Var -> Exp ;
+               ```
+
+       2. 
