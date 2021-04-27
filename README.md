@@ -142,23 +142,35 @@ Commands run after
         2.  gf -make FoodEng.gf FoodIta.gf
     2. Query yes no. Application consists of the following:
 
-| files           | purpose                             |
-| ---             | ---                                 |
-| Makefile        | a makefile                          |
-| Query.gf        | abstract syntax                     |
-| Query???.gf     | concrete syntaxes for each language |
-| Answer.gf       | the question-to-answer function     |
-| QuerySystem.hs  | Haskell Main module                 |
+| files                     | purpose                             |
+| ---                       | ---                                 |
+| Makefile                  | a makefile                          |
+| Query.gf                  | abstract syntax                     |
+| Query???.gf               | concrete syntaxes for each language |
+| Answer.gf                 | the question-to-answer function     |
+| QuerySystem.hs (Main.hs)  | Haskell Main module                 |
 
 23. continue
-    3. ? Cannot import QuerySystems.hs properly
+    3. ? Cannot import QuerySystems.hs properly. (Due to not having global installation of pgf libraries so use a stack build to overcome. See belown for steps)
+       1. With Main.hs, Query.gf, Answer.gf in directory from book, type in terminal ``` gf -make -f haskell Query.gf``` to generate a Query.hs
+       2. copy both cabal and yaml. Use  ```wget https://raw.githubusercontent.com/1Regina/GrammaticalFramework_tutorial/master/gf-embedded-grammars-tutorial/stack.yaml``` in terminal to copy a file of the same contents
+       3. ```stack  build```
+       4. ```gf -make QueryEng.gf```
+       5. ```stack run```
+       6. Questions time after stack run by ``` is 2 prime? ```
+       7. Whenever QueryEng.gf is edited, do ```gf -make QueryEng.gf``` again to update the QueryEng.gfo, then do ```stack run```, then do questions ```is 2 prime?```
 24. Chapter08:
-    1. ? ```p " 2 + 3 * 4"``` and ```p -cat=Exp "2+3*4"``` did not return parser altho linking ok for Calculator.gf
+    1. ? ```p " 2 + 3 * 4"``` and ```p -cat=Exp "2+3*4"``` did not return parser altho linking ok for Calculator.gf (Need a concrete. With abstract, I can only do gt and gr. Import CalculatorC.gf instead and do ```p " 2 + 3 * 4"``` , ```put_string -lexcode "2+3*4"``` and ```put_string -lexcode "2+3*4"|p ``` ).
     * CalculatorC.gf
-    1. ? Ex 8-0  ```infixl``` ```p = Type Prec``` , ```f = Type Str```, ```x, y = Type TermPrec``` and ```EPlus ... EInt  = Type Str```
-    2. ? Ex 8-0 Dont we need to know whats ```nextPrec``` and ```lessPrec```
-    3. ? Ex 8-1 done with ```parenthOpt```
-    4. ? Ex 8-1 with Book Section 6.10```def``` in CalculatorC line 27 and ```ParenthOpt``` in Calculator but cant test  with and without a pipe to ```pt -compute``` can try Ch06 P156 ```parse -tr "1 + 1" | put_tree -compute -tr | linearize```
+    1. ? Ex 8-0  ```infixl``` ```p = Type Prec``` , ```f = Type Str```, ```x, y = Type TermPrec``` and ```EPlus ... EInt  = Type Str```. (See http://www.grammaticalframework.org/~john/rgl-browser/#!prelude/Formal to understand how they work)
+    2. ? Ex 8-0 Dont we need to know whats ```nextPrec``` and ```lessPrec``` (See http://www.grammaticalframework.org/~john/rgl-browser/#!prelude/Formal)
+    3. ? Ex 8-1 done with ```parenthOpt``` (See http://www.grammaticalframework.org/~john/rgl-browser/#!prelude/Formal)
+    4. ? Ex 8-1 with Book Section 6.10```def``` in CalculatorC line 27 and ```ParenthOpt``` in Calculator but cant test  with and without a pipe to ```pt -compute``` can try Ch06 P156 ```parse -tr "1 + 1" | put_tree -compute -tr | linearize``` (Deprecated compute with pipe in gf alr)
+
+      ```p "foo" | pt -compute  -- deprecated
+         pt -compute Foo (Bar (Baz)) -- still in use
+         ```
+
     5. Ex 8-2 natural language calculator. Import http://www.grammaticalframework.org/~john/rgl-browser/#!english/NumeralEng and http://www.grammaticalframework.org/~john/rgl-browser/#!abstract/Numeral
     6. ? Ex 8-2 Should these be added to Calculator.gf from p194
        1. Section 8-3 Programs with variables
@@ -173,4 +185,5 @@ Commands run after
                   EVar   : Var -> Exp ;
                ```
 
-       2. 
+       2. ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut
+          1. credit: Maryam ``` grep, ls , pipe portion```
