@@ -186,11 +186,18 @@ Commands run after
                   EVar   : Var -> Exp ;
                ```
 
-       2. ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut? ({s: Str} is a record and note that Str and string are not the same)
-          1. credit: Maryam ``` grep, ls , pipe portion```
-          2. added dir and homedir and cd
-          3. ```l cd homedir``` returns ```change directory to home directory```
-          4. home directory ```l cd homedir | p``` returns ```cd homedir```
-          5. other directory  ```p "change directory to somedirectory"``` returns ```cd (dir "somedirectory")```
-          6. note ```cd (dir "some other directory")``` returns ```command not found: cd``` bcos of spacing but ```l cd (dir "some other directory")``` can returns ```change directory to some other directory```
-          7. ```l cd (dir "some other directory")|p``` also fail bcos of spaces in the s of dir s. The only word with space allowable is "home directory", hence ```l cd (dir "home directory")|p``` return ```cd homedir``` .
+7. ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut? ({s: Str} is a record and note that Str and string are not the same. To get it interactive, use String literals. See unix.gf dir under Paths. String, Float and Int are literals cats hidden under the hood. and they have limited generation see https://inariksit.github.io/gf/2018/12/05/literals.html#generation:~:text=4003012203950112767-,Generation)
+    1. credit: Maryam ``` grep, ls , pipe portion```
+    2. I added dir and homedir and cd
+    3. ```l cd homedir``` returns ```change directory to home directory```
+    4. home directory ```l cd homedir | p``` returns ```cd homedir```
+    5. other directory  ```p "change directory to somedirectory"``` returns ```cd (dir "somedirectory")```
+    6. note ```cd (dir "some other directory")``` returns ```command not found: cd``` bcos of spacing but ```l cd (dir "some other directory")``` can returns ```change directory to some other directory```
+     7. ```l cd (dir "some other directory")|p``` also fail bcos of spaces in the s of dir s. The only word with space allowable is "home directory", hence ```l cd (dir "home directory")|p``` return ```cd homedir``` .
+     8. Use ss in e.g UnixE.gf concrete lincat Path, Command = SS for records in cases where expecting > 1 field for the record e.g  {s : Str ; g ; Gender} ie more than just strings. { s = path.s} is also for record
+     9. The definitions SS and ss from Prelude
+            SS : Type = {s : Str} ;
+            ss : Str -> SS   (as in dir of Unix.gf)
+           Foo : Type = {s : Str ; g ; Gender} ;
+           ==  Foo : Type = SS ** {g ; Gender} ;
+            getStr : SS -> Str = \ss -> ss.s ;
