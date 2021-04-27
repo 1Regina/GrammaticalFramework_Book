@@ -153,12 +153,13 @@ Commands run after
 23. continue
     3. ? Cannot import QuerySystems.hs properly. (Due to not having global installation of pgf libraries so use a stack build to overcome. See belown for steps)
        1. With Main.hs, Query.gf, Answer.gf in directory from book, type in terminal ``` gf -make -f haskell Query.gf``` to generate a Query.hs
-       2. copy both cabal and yaml. Use  ```wget https://raw.githubusercontent.com/1Regina/GrammaticalFramework_tutorial/master/gf-embedded-grammars-tutorial/stack.yaml``` in terminal to copy a file of the same contents
+       2. copy both cabal and yaml. Use  ```wget https://raw.githubusercontent.com/1Regina/GrammaticalFramework_tutorial/master/gf-embedded-grammars-tutorial/stack.yaml``` in terminal to copy a file of the same contents and tweak its contents for name and module
        3. ```stack  build```
-       4. ```gf -make QueryEng.gf```
-       5. ```stack run```
-       6. Questions time after stack run by ``` is 2 prime? ```
-       7. Whenever QueryEng.gf is edited, do ```gf -make QueryEng.gf``` again to update the QueryEng.gfo, then do ```stack run```, then do questions ```is 2 prime?```
+       4. make a concrete QueryEng.gf and note that number can use the library for integer string with ```Number int = int.s ;``` in line 11.
+       5. ```gf -make QueryEng.gf```
+       6. ```stack run```
+       7. Questions time after stack run by ``` is 2 prime? ```
+       8. Whenever QueryEng.gf is edited, do ```gf -make QueryEng.gf``` again to update the QueryEng.gfo, then do ```stack run```, then do questions ```is 2 prime?```
 24. Chapter08:
     1. ? ```p " 2 + 3 * 4"``` and ```p -cat=Exp "2+3*4"``` did not return parser altho linking ok for Calculator.gf (Need a concrete. With abstract, I can only do gt and gr. Import CalculatorC.gf instead and do ```p " 2 + 3 * 4"``` , ```put_string -lexcode "2+3*4"``` and ```put_string -lexcode "2+3*4"|p ``` ).
     * CalculatorC.gf
@@ -185,5 +186,11 @@ Commands run after
                   EVar   : Var -> Exp ;
                ```
 
-       2. ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut
+       2. ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut? ({s: Str} is a record and note that Str and string are not the same)
           1. credit: Maryam ``` grep, ls , pipe portion```
+          2. added dir and homedir and cd
+          3. ```l cd homedir``` returns ```change directory to home directory```
+          4. home directory ```l cd homedir | p``` returns ```cd homedir```
+          5. other directory  ```p "change directory to somedirectory"``` returns ```cd (dir "somedirectory")```
+          6. note ```cd (dir "some other directory")``` returns ```command not found: cd``` bcos of spacing but ```l cd (dir "some other directory")``` can returns ```change directory to some other directory```
+          7. ```l cd (dir "some other directory")|p``` also fail bcos of spaces in the s of dir s. The only word with space allowable is "home directory", hence ```l cd (dir "home directory")|p``` return ```cd homedir``` .
