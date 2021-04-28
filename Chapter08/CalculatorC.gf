@@ -43,7 +43,8 @@ concrete CalculatorC of Calculator = open Formal, Prelude in {
 
     --     -- non-associative examples are minus and division
     --     infix       : Prec  ->  Str  -> (_,_ : TermPrec) -> TermPrec = \ p, f, x, y -> {
-    --                 s = usePrec x p ++ f ++ usePrec y p ;     -- right assoc means a = b = c aka a = (b = c)
+    --                 s = usePrec x p ++ f ++ usePrec y p ; [wrong]     -- right assoc means a = b = c aka a = (b = c)
+                        --    (usePrec (nextPrec p) x ++ f ++ usePrec (nextPrec p) y) [answer from http://www.grammaticalframework.org/~john/rgl-browser/#!prelude/Formal]
     --                 p = p
     --                 };
     }
