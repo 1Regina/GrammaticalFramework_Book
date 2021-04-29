@@ -1,10 +1,10 @@
 name: QuerySystem
 version: 0.1
 homepage:
-author: Inari Listenmaa
+author: Regina
 category: Natural Language Processing
 build-type: Simple
-extra-source-files: 
+extra-source-files:
 cabal-version: >=1.10
 
 
