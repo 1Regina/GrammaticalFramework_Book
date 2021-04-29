@@ -175,7 +175,7 @@ Commands run after
          ```
 
     5. Ex 8-2 natural language calculator. Import http://www.grammaticalframework.org/~john/rgl-browser/#!english/NumeralEng and http://www.grammaticalframework.org/~john/rgl-browser/#!abstract/Numeral
-    6. ? Ex 8-2 Should these be added to Calculator.gf from p194
+    6. ? Ex 8-2 Should these be added to Calculator.gf from p194 (Ignore and see next point)
        1. Section 8-3 Programs with variables
             ```
                cat
@@ -188,7 +188,21 @@ Commands run after
                   EVar   : Var -> Exp ;
                ```
 
-    7. ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut? ({s: Str} is a record and note that Str and string are not the same. To get it interactive, use String literals. See unix.gf fun dir under Paths. String, Float and Int are literals cats hidden under the hood. and they have limited generation see https://inariksit.github.io/gf/2018/12/05/literals.html#generation:~:text=4003012203950112767-,Generation)
+   7. Chapter08/CalculatorNumeral to
+      1. Open Module NumeralEng and extend...Working with natural english
+      2. Since sum, difference, product are always  integer and integer, we can have a template ``` oper arith op e1 e2```
+      3. Create a unique oper for divide as it is of integer by integer, ``` oper divide op_Div e1 e2``` .
+      4. Statements will be "the sum of e1 and e2" and "the division of e1 by e2" .
+      5. Run ```p "the sum of two and ten"``` , ```gr EDiv ? ? | l``` , ```gr  | l -treebank``` , ```p "ten thousand" | l -treebank``` , ```gr EPlus ? ? | l -treebank```
+      6. Note the lin type Numeral -> Exp for  EInt numeral =  mkNP (mkDet numeral)  ; -- mkNP and mkDet from SyntaxEng
+   8. To work with digits instead of natural english: Chapter08: open SymbolicEng and also changel lin EInt numberal
+       1. Added SymbolicEng instead and lin type Int -> Exp for EInt numeral = symb numeral ; -- Symbolic module, symb : Int -> NP
+       2. Commands : ```gf CalculatorC.gf CalculatorEng.gf```
+       3. Run ``` gr  | l -treebank``` , ```p -lang=C "9 * ( 12 - 79 )"``` , ```p -lang=C "9 * ( 12 - 79 )" | l -treebank```
+       4. Run ``` p -lang=Eng "the sum of 2 and 10" ``` and ```p -lang=Eng "the division of 2 by  10"``` , ```p -lang=Eng "the division of 2 by  10" |l -treebank```
+       5. Run ```i -retain CalculatorEng.gf``` and ```cc arith sum_N```
+
+   9.  ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut? ({s: Str} is a record and note that Str and string are not the same. To get it interactive, use String literals. See unix.gf fun dir under Paths. String, Float and Int are literals cats hidden under the hood. and they have limited generation see https://inariksit.github.io/gf/2018/12/05/literals.html#generation:~:text=4003012203950112767-,Generation)
        1. credit: Maryam ``` grep, ls , pipe portion```
        2. I added dir and homedir and cd
        3. ```l cd homedir``` returns ```change directory to home directory```
