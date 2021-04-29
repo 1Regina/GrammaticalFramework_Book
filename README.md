@@ -144,16 +144,18 @@ Commands run after
 
 | files                     | purpose                             |
 | ---                       | ---                                 |
-| Makefile                  | a makefile                          |
+| Makefile    (Query.hs)    | a makefile                          |
 | Query.gf                  | abstract syntax                     |
 | Query???.gf               | concrete syntaxes for each language |
-| Answer.gf                 | the question-to-answer function     |
+| Answer.hs                 | the question-to-answer function     |
 | QuerySystem.hs (Main.hs)  | Haskell Main module                 |
+| .cabal                    | update main-is & other-modules in hs|
+| stack.yaml                | to enable stack work                |
 
 23. continue
-    3. ? Cannot import QuerySystems.hs properly. (Due to not having global installation of pgf libraries so use a stack build to overcome. See belown for steps)
+    3. ? Cannot import QuerySystems.hs (renamed Main.hs) properly. (Due to not having global installation of pgf libraries so use a stack build to overcome. See below for steps)
        1. With Main.hs, Query.gf, Answer.gf in directory from book, type in terminal ``` gf -make -f haskell Query.gf``` to generate a Query.hs
-       2. copy both cabal and yaml. Use  ```wget https://raw.githubusercontent.com/1Regina/GrammaticalFramework_tutorial/master/gf-embedded-grammars-tutorial/stack.yaml``` in terminal to copy a file of the same contents and tweak its contents for name and module
+       2. copy both cabal and yaml. Use  ```wget https://raw.githubusercontent.com/1Regina/GrammaticalFramework_tutorial/master/gf-embedded-grammars-tutorial/stack.yaml``` in terminal to copy a file of the same contents and tweak its contents for name and module. To get the url, click raw on github.
        3. ```stack  build```
        4. make a concrete QueryEng.gf and note that number can use the library for integer string with ```Number int = int.s ;``` in line 11.
        5. ```gf -make QueryEng.gf```
@@ -186,18 +188,21 @@ Commands run after
                   EVar   : Var -> Exp ;
                ```
 
-7. ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut? ({s: Str} is a record and note that Str and string are not the same. To get it interactive, use String literals. See unix.gf dir under Paths. String, Float and Int are literals cats hidden under the hood. and they have limited generation see https://inariksit.github.io/gf/2018/12/05/literals.html#generation:~:text=4003012203950112767-,Generation)
-    1. credit: Maryam ``` grep, ls , pipe portion```
-    2. I added dir and homedir and cd
-    3. ```l cd homedir``` returns ```change directory to home directory```
-    4. home directory ```l cd homedir | p``` returns ```cd homedir```
-    5. other directory  ```p "change directory to somedirectory"``` returns ```cd (dir "somedirectory")```
-    6. note ```cd (dir "some other directory")``` returns ```command not found: cd``` bcos of spacing but ```l cd (dir "some other directory")``` can returns ```change directory to some other directory```
-     7. ```l cd (dir "some other directory")|p``` also fail bcos of spaces in the s of dir s. The only word with space allowable is "home directory", hence ```l cd (dir "home directory")|p``` return ```cd homedir``` .
-     8. Use ss in e.g UnixE.gf concrete lincat Path, Command = SS for records in cases where expecting > 1 field for the record e.g  {s : Str ; g ; Gender} ie more than just strings. { s = path.s} is also for record
-     9. The definitions SS and ss from Prelude
-            SS : Type = {s : Str} ;
-            ss : Str -> SS   (as in dir of Unix.gf)
-           Foo : Type = {s : Str ; g ; Gender} ;
-           ==  Foo : Type = SS ** {g ; Gender} ;
-            getStr : SS -> Str = \ss -> ss.s ;
+    7. ? E8-10 UnixE.gf ```lin directory path``` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut? ({s: Str} is a record and note that Str and string are not the same. To get it interactive, use String literals. See unix.gf fun dir under Paths. String, Float and Int are literals cats hidden under the hood. and they have limited generation see https://inariksit.github.io/gf/2018/12/05/literals.html#generation:~:text=4003012203950112767-,Generation)
+       1. credit: Maryam ``` grep, ls , pipe portion```
+       2. I added dir and homedir and cd
+       3. ```l cd homedir``` returns ```change directory to home directory```
+       4. home directory ```l cd homedir | p``` returns ```cd homedir```
+       5. other directory  ```p "change directory to somedirectory"``` returns ```cd (dir "somedirectory")```
+       6. note ```cd (dir "some other directory")``` returns ```command not found: cd``` bcos of spacing but ```l cd (dir "some other directory")``` can returns ```change directory to some other directory```
+       7. ```l cd (dir "some other directory")|p``` also fail bcos of spaces in the s of dir s. The only word with space allowable is "home directory", hence ```l cd (dir "home directory")|p``` return ```cd homedir``` .
+       8. Use ss in e.g UnixE.gf concrete lincat Path, Command = SS for records in cases where expecting > 1 field for the record e.g  {s : Str ; g ; Gender} ie more than just strings. { s = path.s} is also for record
+       9. The definitions SS and ss from Prelude
+            ```SS : Type = {s : Str} ;
+               ss : Str -> SS   (as in dir of Unix.gf)
+               Foo : Type = {s : Str ; g ; Gender} ;
+               ==  Foo : Type = SS ** {g ; Gender} ;
+               getStr : SS -> Str = \ss -> ss.s ;
+               ```
+
+25. p213 Fig 68. variable and agreement
