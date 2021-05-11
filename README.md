@@ -80,7 +80,7 @@ Commands run after
 3. do i need to ensure the same oper name exist for ResEng and ResIta? (Nope dont need. https://inariksit.github.io/gf/2021/02/15/rgl-api-core-extensions.html)
 4. resEng : what does the w and ws in regNoun stand for. LHS or RHS? .
     (Explanation: regNoun "boy" calls mkNoun function with the arguments. w = "boy" and ws = "boys")
-5.  With resource FoodEng, why do i still need a abstract Food ..comparing agst BooleanE3. (Correct. See Inari rgl-tutorial https://github.com/inariksit/rgl-tutorial)
+5.  With resource FoodsEng, why do i still need a abstract Foods ..comparing agst BooleanE3. (Correct. See Inari rgl-tutorial https://github.com/inariksit/rgl-tutorial)
 6.  See regNounNomGen for complex Noun in ResEng.gf Should it be 2 or 3 arguments < Str -> Str -> Str -> regNounNomGen. (Code is now changed and updated. Old is deleted.)
 7.  Is my case expression in table for allVerb in ResEng.gf correct? if yes, i can get rid of regVerb correct? (Yes. allVerb is more comprehensive than the regVerb so keep allVerb, rid regVerb)
 8.  UmlautE4 syntax error (corrected. Use this instead of gf tutorial one. remove "in umlaut at end... and param" dont need since the string are not called again like in ResEng into other functions. Run command ```i -retain UmlautE4.gf``` and then ```cc umlautGalore "boy"``` )
@@ -218,5 +218,39 @@ Commands run after
                ==  Foo : Type = SS ** {g ; Gender} ;
                getStr : SS -> Str = \ss -> ss.s ;
                ```
+<<Chapter 09>>
+25. 1. p213 Fig 68. variable (ok lhs of equiation) and agreement.
+    2. 9.6 Determinants p217. lost with the case and agreement part below fig 76. pls walk me over the lin and lincat esp
+          * ```lin DetCN det cn = {s = \\c => det.s ! cn.g ! c ++ cn.s ! det.n ! c ;..... ```
+    3. Compare 9.7 modication has lincat ap.s and cn.s per the argument, similar to 9.4 Predication and 9.5 Complication vs 9.5 P216 EXTRA ++
+      9.4 p214
+      lin
+         PredVP np vp ={s = \\t => np.s ! nom ++ vp.s ! t ! np.a}
 
-25. p213 Fig 68. variable and agreement
+      9.5 p215-216
+      lin
+         ComplV2 v np = {s = \\t,a => v.s ! t ! a ++ np.s ! v.c}
+
+      9.7 p218
+      lincat
+        AP  = {s : Gender => Number => Case => Str             }
+        CN  = {s :           Number => Case => Str ; g : Gender}
+       lin
+        AdjCN ap cn = {s = \\n,c => ap.s ! cn.g ! n ! c ++ cn.s ! n ! c ;g = cn.g}
+
+      9.5 p216 EXTRA ++
+      lincat
+       V2 ={s : Tense => Agr => Str ; c : Case ; prep : Str}
+      lin
+       ComplV2 v2 vp ={s = \\t,a => v2.s ! t ! a ++ v2.prep ++ np.s ! v2.c}
+26. 9.11 p222 Modiciation and Determination using oper preOrPost for AdjCN in Prelude
+    1.  oper preOrPost : Bool -> Str -> Str = \p,a,b ->
+            case p of {
+               True  => a ++ b ;
+               False => b ++ a
+               }
+         lin AdjCN cn ap = {
+            s = \\n =>
+               preOrPost ap.isPre (ap.s ! cn.g ! n) (cn.s ! n) ;
+            g = cn.g
+            }

@@ -1,9 +1,9 @@
-abstract Food = {
+abstract Foods = {
     flags startcat = Comment ;
     cat
         Comment ; Item ; Kind ; Quality ; ComplexKind ; {-add ComplexKind for unambiguous-}
     fun
-        Pron : Item -> Item ; 
+        Pron : Item -> Item ;
         NPred: Item -> Quality -> Comment ; {-negative Pred-}
         Pred : Item -> Quality -> Comment ;
         This, That : ComplexKind -> Item ; {-change Kind to ComplexKind so fish can now be complexkind as Kind2C is added-}
@@ -14,6 +14,6 @@ abstract Food = {
         -- 2.8 ambiguous
         -- With : Kind -> Kind -> Kind ;
         -- 2.8 unambiguous
-        With : Kind -> ComplexKind -> ComplexKind; 
+        With : Kind -> ComplexKind -> ComplexKind;
         Kind2C : Kind -> ComplexKind;
 }
