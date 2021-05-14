@@ -154,7 +154,7 @@ Commands run after
 
 23. continue
     3. ? Cannot import QuerySystems.hs (renamed Main.hs) properly. (Due to not having global installation of pgf libraries so use a stack build to overcome. See below for steps)
-       1. With Main.hs, Query.gf, Answer.gf in directory from book, type in terminal ``` gf -make -f haskell Query.gf``` to generate a Query.hs
+       1. With Main.hs, Query.gf, Answer.hs in directory from book, type in terminal ``` gf -make -f haskell Query.gf``` to generate a Query.hs
        2. copy both cabal and yaml. Use  ```wget https://raw.githubusercontent.com/1Regina/GrammaticalFramework_tutorial/master/gf-embedded-grammars-tutorial/stack.yaml``` in terminal to copy a file of the same contents and tweak its contents for name and module. To get the url, click raw on github.
        3. ```stack  build```
        4. make a concrete QueryEng.gf and note that number can use the library for integer string with ```Number int = int.s ;``` in line 11.
@@ -254,3 +254,24 @@ Commands run after
                preOrPost ap.isPre (ap.s ! cn.g ! n) (cn.s ! n) ;
             g = cn.g
             }
+
+<<Chapter 10 >>
+27. Ex 10.1 Using Food and FoodEng from Chapter 2, undo 2.8 unambigous Kind2C and ComplexKind and recreate, to get 2 trees, do:
+   1. to get 2 trees
+      ```
+      p "this fish with cheese with wine is Italian"
+      Pred (This (With Fish (With Cheese Wine))) Italian
+      Pred (This (With (With Fish Cheese) Wine)) Italian
+      ```
+   2. to utilise "it"
+      ```
+      l NPred (Pron (That Fish)) Warm
+      it isn't warm
+      ```
+
+      ```
+      NPred (Pron ?1) Warm
+      it isn't warm
+      ```
+   3. How to incorp NPred for item ++ "isn't" ++ quality
+   4. syntax error
