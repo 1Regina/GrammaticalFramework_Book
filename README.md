@@ -314,3 +314,96 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       ```
    3. ? Food1treeEng.gf: How to incorp NPred for item ++ "isn't" ++ quality
    4. ? syntax error upon importing
+
+#### A : mini resource grammar
+1.  __A.2 ResIta__
+    1.  ? p250 `param Agr    = Ag Gender Number Person ;`  where is that `Ag` coming/lifted from? NB Agreement is a constituent form that is dependent on other constituents. p259 an inherent feature of one constituent determines a variable feature of another one, e.g. `lin Pred np vp = np.s ++ vp.s ! np.n`.
+    2.  ? `=>` for inherent features and case expressino?
+        1.  p252 `oper adjDet : Adj -> Number -> {s : Gender => Case => Str ; n : Number} = ...` : isnt `=>` for case expression as in `regVerb` above? How/when are `=>` normally used
+        2. ? p268 and for inherent features `oper regA : Str -> {s : Gender => Number => Str} = ...`
+    3.  ? p257 interface Syntax `oper ... overload` allow for multiple trees for each parser like `mkS` , `mkCl` .
+
+#### B: Linguistic terms glossary
+1.  Read them!
+
+#### C: GF Programming Language
+1.  C2.1 : Read this section P267-268 to know:
+    1.  lincat
+    2.  linearization with lin definition
+    3.  param
+    4.  fun (to give a lin) and cat (to give a lincat)
+    5.  inheritance/ extension
+    6.  resource module with its oper constituting params
+    7.  opening module with `open MorphoFre in {...}` vs qualified via prefix `.` e.g. A.a
+    8.  interface e.g Lexicon {oper(s)} vs instance e.g. LexiconEng of Lexicon = { oper "more granular"}
+    9.  functors = parametrized modules = incomplete modules for concrete syntax via interface:
+        1.  `incomplete concrete AdjI of Adj =  open Lexicon in {lincat..lin..}`
+        2.  instantiate by providing instances `concrete AdjEng of Adj = AdjI with(Lexicon = LexiconEng) ;`
+        3. Also from C2.10 Functor instantiated:
+
+        ```
+         concrete FoodsEng of Foods = CommentsEng **
+            FoodsI-[Pizza] with
+               (Syntax = SyntaxEng),
+               (LexFoods = LexFoodsEng)
+            open SyntaxEng, ParadigmsEng in {
+               lin Pizza = mkCN (mkA "Italian") (mkN "pie") ;
+            }
+         ```
+2.  ? C2.1: to confirm Branching order with muliple fetures:
+
+      ```
+      oper regA : Str -> {s : Gender => Number => Str}
+            =\fin -> {s = table {
+                        Masc => table {Sg => fin       ; Pl => fin + "s"} ;
+                        Fem  => table {Sg => fin + "e" ; Pl => fin + "es"}
+                                 }} ;
+      ```
+3. C2.5: Modules and their extends and opens types
+
+| module type         | extends   | opens    | body                |
+| ---                 | ---       | ---      | ---                 |
+| abstract            | abstract  | -        | cat, fun, def, data |
+| concrete of _abstr_ | concrete  | resource*| lin*, oper, param   |
+| resource            | resource* | resource*| oper, param         |
+| interface           | resource+ | resource*| oper, param         |
+| instance of _interf_| resource* | resource*| oper, param         |
+| incomplete concrete | concrete+ | resource+| lin*, oper, param   |
+
+* resource* : resource, instance, concrete
+* resource+ : resource*, interface, abstract
+* concrete+ : concrete, incomplete concrete
+* lin* : lin, lincat, lindef, printname cat, printname fun
+
+3. C2.7: Inheritance: inherits a, b, c from M1, and all names but d from M2
+   > N = M1 [a,b,c], M2-[d]
+
+4. C2.10: Completeness requirement across the different modules, interface , instances etc.
+   1. Interface need not be complete.
+   2. Instance can complete the interface!
+
+   ```
+      interface Pos = {
+         param Case ;                 -- no definition
+         param Number = Sg | Pl ;     -- definition given
+         oper Noun : Type = {         -- relative definition given
+            s : Number => Case => Str
+         } ;
+
+         oper regNoun : Str -> Noun ; -- no definition
+      }
+         instance PosEng of Pos = {
+            param Case = Nom | Gen ;     -- definition of Case
+                                         -- Number and Noun inherited
+            oper regNoun = \dog -> {     -- type of regNoun inherited
+               s = table {                -- definition of regNoun
+                  Sg => table {
+                     Nom => dog
+                     -- etc
+                     }
+               } ;
+            oper house_N : Noun =        -- new definition
+               regNoun "house" ;
+            }
+      ```
+5. ? C3.1 What are flags?
