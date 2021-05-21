@@ -208,7 +208,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       3. Create a unique oper for divide as it is of "integer by integer", ` oper divide op_Div e1 e2` .
       4. Statements will be "the sum of e1 and e2" and "the division of e1 by e2" .
       5. Run these commands to try
-          1. `p "the sum o* > 1. f two and ten"`
+          1. `p "the sum of two and ten"`
           2. `gr EDiv ? ? | l`
           3. `gr  | l -treebank`
           4. `p "ten thousand" | l -treebank`
@@ -406,4 +406,87 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
                regNoun "house" ;
             }
       ```
-5. ? C3.1 What are flags?
+5. ? C3.1 What are flags? (flags are commonly included in grammars:
+      1. coding - defining the character encoding of Unicode string literals (in any module containing string literals)
+      2. startcat - define the default target category of parsing (in an abstract module))
+6. ? C3.6 We dont really use data constructor declaration correct? Data f: A -> A1 -> A2
+7. ? C3.7 Abstract syntax that we have always been using is primitive/constructor/defined?
+8. C4.2 Table of precedences of GF expressions -- See and compare
+9. ? C4.4 Conversion : had not seen them in my gf exercises so far. How to read the down arrow
+10. C4.9 : String literals. Expressions of type Str have the following canonical forms:
+      1. tokens, i.e. __string literals__, in double quotes, e.g."foo"
+      2. the empty token list,[]
+      3. concatenation,s++t, where s, t: __Str__
+      4. prefix-dependent choice, __pre__ { p1 => s1; . . . ; pn => sn ; _ =>s }, where
+            1. s1, . . . , sn, s: __Str__
+            2. p1, . . . , pn are patterns of type __Str__
+
+      ```
+      #gluing: there are no empty tokens, but the expression[]can be usedin a context requiring a token, in particular in gluing expression:
+      s + t, where s, t: Str
+      "foo" + "bar" ⇓ "foobar"
+      t + [] ⇓ t
+      [] + t ⇓ t
+
+      e.g:
+      "one two three" ≡≡ "one" ++ "two" ++ "three"
+      ```
+11. C4.9 Gluing = concatenation
+      ```
+      s + (t + u) ⇓ s + t + u
+      s ++ (t ++ u) ⇓ s ++ t ++ u
+      ```
+12. C4.9 prefix dependency `pre {"a" | "e" | "i" | "o" => "an" ; _ => "a"}` then gluing `pre{p1 => s1; . . . ; pn => sn; => s} ++ t ⇓` . See Chapter 4 [prefix](Chapter04/prefix.gf).
+13. C4.10 records:
+      1. Record form :
+          >  {r1 : A1;. . .; rn : An}
+      2. Record to denote combo of its features:
+         >  {r1 = a1;. . .; rn = an}
+      3.  The fields of a record  are of the form `r = a`, also called value assignments. Value assignments may optionally indicate the type, as in `r : A = a` .
+      4. Order of fields is unimpt so long as values assignments are all type-correct.
+      5. Label
+         > ss : Str -> {s : Str} = \s -> {s = s} ;
+      6. Projection `t.r` where t must be a record and r must be a label defined in it. The computation rule for projection returns the value assigned to that field: `{. . .; r = a;. . .}.r ⇓ a`
+      7. Record extension with R ** S produces a record with union of fields of R and S. It requires:
+         1. both R and S are either records or record types
+         2. the labels in R and S are distinct.
+14. C4.11 [Subtyping](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html)
+      1. A is a subtype of B means that a : A implies a : B.
+      2. covariance: if A is a subtype of B, then C -> A is a subtype of C -> B.
+      3. contravariance: if A is a subtype of B, then B -> C is a subtype of A -> C
+      4. transitive: if A is a subtype of B and B is a subtype of C, then A is a subtype of C.
+15. C4.12 Tables aka finite functions because could finitely enumerate all argument-value pairs.
+      1. V1,. . . ,Vn is the complete list of the parameter values of the argument type P, and each ti is an expression of the value type T.
+         > table { V1 => t1; . . . ;Vn => tn}
+      2. Support patterns matching where p1,. . . .,pm is a list of patterns that covers all values of type P. Each pattern pi may bind some variables, on which the expression ti may depend.
+         > table{p1=> t1; . . . ;pm => tm}
+      3. Selection operator `!` , applied to a table t and to an expression v of its argument type `t!v` returns the first pattern matching result from t with v.
+      4. Case expression syntactic sugar below.  Note type of e can be not just Str, but also a record (or a tuple) with __Str__ and parameter type components.
+         > case e of {. . .} ≡≡ table {. . .} ! e
+16. C4.13 Pattern matching  p295 for
+      1. types:
+         1. Integer and Str
+         2. Str
+         3. Ints n
+      2. record pattern matching can use partial records:
+         > {g = Fem} => t in a table of type {g : Gender ; n : Number} => T means the same as {g = Fem ; n = _} => t
+      3. Pattern macros = opers of type patternT with operator #. Using #as a switch.
+         > oper vowel : pattern Str = #("a" | "e" | "i" | "o")
+
+         > pre {#vowel => "an" ;_ => "a"}
+         #as a switch
+17. C4.15 Local Definition. See "piece_of_cake" in [Calculator](Chapter08/CalculatorDigitNumeral) CalculatorEng.gf. Compression of several local definitions:
+      1.  > let x : T = t ; y : U = u in e
+          is the same as
+          > let x : T = t in let y : U = u in e
+18. C4.17 Reusing grammars as resources:
+      1. if `t : T then lin C t : lincat C T` The type `lincat C T` is a subtype of T, which makes the above translation of lin judgements type-correct.
+      2. The constructs lincat C T and lin C t are implemented internally  by  using __lock  fields__,  which  are  record  labels  of  form lock C of  the dummy type {} added to the record type T. **By using the lin C construct,[lock fields](https://github.com/1Regina/GrammaticalFramework_RGL/tree/master/RGL/rgl-tutorial/lesson4) can, and should, be avoided altogether in the source code.**
+19. C4.18 Predefined concrete syntax types:
+      1. Types:
+         1. Str, the type of tokens and token lists (defined in Section C.4.9)
+         2. Integer, the type of nonnegative integers
+         3. Ints n, the type of integers from 0 to n
+         4. Type, the type of (concrete syntax) types -- user-written
+         5. PType, the type of parameter types -- user-written for param
+      2. **Str** and **Integer** (Concrete Syntax Types) vs **String** and **Int** (Abstract Syntax Categories/Types)
