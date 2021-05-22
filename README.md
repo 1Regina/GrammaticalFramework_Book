@@ -375,10 +375,10 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 * concrete+ : concrete, incomplete concrete
 * lin* : lin, lincat, lindef, printname cat, printname fun
 
-3. C2.7: Inheritance: inherits a, b, c from M1, and all names but d from M2
+4. C2.7: Inheritance: inherits a, b, c from M1, and all names but d from M2
    > N = M1 [a,b,c], M2-[d]
 
-4. C2.10: Completeness requirement across the different modules, interface , instances etc.
+5. C2.10: Completeness requirement across the different modules, interface , instances etc.
    1. Interface need not be complete.
    2. Instance can complete the interface!
 
@@ -406,14 +406,14 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
                regNoun "house" ;
             }
       ```
-5. ? C3.1 What are flags? (flags are commonly included in grammars:
+6. ? C3.1 What are flags? (flags are commonly included in grammars:
       1. coding - defining the character encoding of Unicode string literals (in any module containing string literals)
       2. startcat - define the default target category of parsing (in an abstract module))
-6. ? C3.6 We dont really use data constructor declaration correct? Data f: A -> A1 -> A2
-7. ? C3.7 Abstract syntax that we have always been using is primitive/constructor/defined?
-8. C4.2 Table of precedences of GF expressions -- See and compare
-9. ? C4.4 Conversion : had not seen them in my gf exercises so far. How to read the down arrow
-10. C4.9 : String literals. Expressions of type Str have the following canonical forms:
+7. ? C3.6 We dont really use data constructor declaration correct? Data f: A -> A1 -> A2
+8. ? C3.7 Abstract syntax that we have always been using is primitive/constructor/defined?
+9. C4.2 Table of precedences of GF expressions -- See and compare
+10. ? C4.4 Conversion : had not seen them in my gf exercises so far. How to read the down arrow
+11. C4.9 : String literals. Expressions of type Str have the following canonical forms:
       1. tokens, i.e. __string literals__, in double quotes, e.g."foo"
       2. the empty token list,[]
       3. concatenation,s++t, where s, t: __Str__
@@ -431,13 +431,13 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       e.g:
       "one two three" ≡≡ "one" ++ "two" ++ "three"
       ```
-11. C4.9 Gluing = concatenation
+12. C4.9 Gluing = concatenation
       ```
       s + (t + u) ⇓ s + t + u
       s ++ (t ++ u) ⇓ s ++ t ++ u
       ```
-12. C4.9 prefix dependency `pre {"a" | "e" | "i" | "o" => "an" ; _ => "a"}` then gluing `pre{p1 => s1; . . . ; pn => sn; => s} ++ t ⇓` . See Chapter 4 [prefix](Chapter04/prefix.gf).
-13. C4.10 records:
+13. C4.9 prefix dependency `pre {"a" | "e" | "i" | "o" => "an" ; _ => "a"}` then gluing `pre{p1 => s1; . . . ; pn => sn; => s} ++ t ⇓` . See Chapter 4 [prefix](Chapter04/prefix.gf).
+14. C4.10 records:
       1. Record form :
           >  {r1 : A1;. . .; rn : An}
       2. Record to denote combo of its features:
@@ -450,12 +450,12 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       7. Record extension with R ** S produces a record with union of fields of R and S. It requires:
          1. both R and S are either records or record types
          2. the labels in R and S are distinct.
-14. C4.11 [Subtyping](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html)
+15. C4.11 [Subtyping](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html)
       1. A is a subtype of B means that a : A implies a : B.
       2. covariance: if A is a subtype of B, then C -> A is a subtype of C -> B.
       3. contravariance: if A is a subtype of B, then B -> C is a subtype of A -> C
       4. transitive: if A is a subtype of B and B is a subtype of C, then A is a subtype of C.
-15. C4.12 Tables aka finite functions because could finitely enumerate all argument-value pairs.
+16. C4.12 Tables aka finite functions because could finitely enumerate all argument-value pairs.
       1. V1,. . . ,Vn is the complete list of the parameter values of the argument type P, and each ti is an expression of the value type T.
          > table { V1 => t1; . . . ;Vn => tn}
       2. Support patterns matching where p1,. . . .,pm is a list of patterns that covers all values of type P. Each pattern pi may bind some variables, on which the expression ti may depend.
@@ -463,7 +463,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       3. Selection operator `!` , applied to a table t and to an expression v of its argument type `t!v` returns the first pattern matching result from t with v.
       4. Case expression syntactic sugar below.  Note type of e can be not just Str, but also a record (or a tuple) with __Str__ and parameter type components.
          > case e of {. . .} ≡≡ table {. . .} ! e
-16. C4.13 Pattern matching  p295 for
+17. C4.13 Pattern matching  p295 for
       1. types:
          1. Integer and Str
          2. Str
@@ -475,14 +475,14 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 
          > pre {#vowel => "an" ;_ => "a"}
          #as a switch
-17. C4.15 Local Definition. See "piece_of_cake" in [Calculator](Chapter08/CalculatorDigitNumeral) CalculatorEng.gf. Compression of several local definitions:
+18. C4.15 Local Definition. See "piece_of_cake" in [Calculator](Chapter08/CalculatorDigitNumeral) CalculatorEng.gf. Compression of several local definitions:
       1.  > let x : T = t ; y : U = u in e
           is the same as
           > let x : T = t in let y : U = u in e
-18. C4.17 Reusing grammars as resources:
+19. C4.17 Reusing grammars as resources:
       1. if `t : T then lin C t : lincat C T` The type `lincat C T` is a subtype of T, which makes the above translation of lin judgements type-correct.
       2. The constructs lincat C T and lin C t are implemented internally  by  using __lock  fields__,  which  are  record  labels  of  form lock C of  the dummy type {} added to the record type T. **By using the lin C construct,[lock fields](https://github.com/1Regina/GrammaticalFramework_RGL/tree/master/RGL/rgl-tutorial/lesson4) can, and should, be avoided altogether in the source code.**
-19. C4.18 Predefined concrete syntax types:
+20. C4.18 Predefined concrete syntax types:
       1. Types:
          1. Str, the type of tokens and token lists (defined in Section C.4.9)
          2. Integer, the type of nonnegative integers
@@ -490,3 +490,123 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
          4. Type, the type of (concrete syntax) types -- user-written
          5. PType, the type of parameter types -- user-written for param
       2. **Str** and **Integer** (Concrete Syntax Types) vs **String** and **Int** (Abstract Syntax Categories/Types)
+21. C5.2 Compiler pragmas to search through file
+      1. search through the current directory (.) and the directories *present* and */home/aarne/GF/tmp*, in this order.
+      > --# -path=.:present:/home/aarne/GF/tmp
+      2. $(GFLIBPATH)/DIR is searched. The default path list is **.:prelude**, and the directory prelude is automatically included in all path lists.
+22. C6.1 Literals - Double precision float literals: 〈digit〉+‘.’〈digit〉+ (‘e’‘-’?〈digit〉+)? i.e. two sequences of digits separated by a decimal point, optionally followed by an unsigned or negative exponent
+
+#### D: GF Resource Grammar Library
+1. D.1 Catgegory System
+
+|Category|Explanation                         |Example (default)           |
+|---     |---                                 |---                         |
+|Ant     |anteriority.                        |**simultaneous**, anterior. |
+|CAdv    |comparative adverb                  |more                        |
+|CN.     |common noun (without determiner)    |red house                   |
+|Card    |cardinal number                     |seven                       |
+|Cl      |declarative clause, with all tenses |she looks at this           |
+|ClSlash |clause missing noun phrase          |she looks at                |
+|Comp    |complement of copula, such asAP     |very warm                   |
+|Conj    |conjunction                         |and                         |
+|Det.    |determiner phrase                   |those seven                 |
+|Digits. |cardinal or ordinal in digits       | 1,000/1,000th              |
+|IAdv    |interrogative adverb                |why                         |
+|IComp   |interrogative complement of copula  |where                       |
+|IDet.   |interrogative determiner            |how many                    |
+|IP      |interrogative pronoun               |who                         |
+|Imp.    |imperative                          |look at this                |
+|NP.     |noun phrase (subject or object)     |the red house               |
+|Num     |number determining element.         |seven, **singular**, plural |
+|Numeral |cardinal or ordinal in words        |five/fifth                  |
+|Ord.    |ordinal number (used inDet)         |seventh                     |
+|PConj   |phrase-beginning conjunction        |therefore, **no pconj**     |
+|Phr     |phrase in a text                    |but be quiet please         |
+|Pol     |polarity                            |**positive**, negative      |
+|Predet  |predeterminer (prefixedQuant)       |all                         |
+|Prep.   |preposition, or just case           |in                          |
+|Pron.   |personal pronoun                    |she                         |
+|QCl     |question clause, with all tenses.   |why does she walk           |
+|QS      |question                            |where did she live          |
+|Quant.  |quantifier (’nucleus’ of Det).      |this/these                  |
+|RCl.    |relative clause, with all tenses.   |in which she lives          |
+|RP      |relative pronounin                  |which                       |
+|RS      |relative sentence                   |in which she lived          |
+|S       |declarative sentence                |she looked at him.          |
+|SC      |embedded sentence or question.      |that it rains               |
+|SSlash  |sentence missing noun phrase.       |she looked at               |
+|Subj.   |subjunction                         |if                          |
+|Temp    |temporal and aspectual features     |past anterior               |
+|Tense.  |tense                               |**present**, past, future   |
+|Text    |text consisting of several phrases. |He is here. Why?            |
+|Utt.    |utterance: sentence, question. . .  |be quiet                    |
+|VPverb  |phrase                              |is very warm                |
+|VPSlash.|verb phrase missing noun phrase     |look at                     |
+|Voc     |vocative                            |my darling, **no voc**      |
+[C]      |list of categoryC=Adv,AP,NP,RS,S.   |X, Y, Z                     |
+
+<< Syntax Trees>>
+2. D2.3 Clause level predication and complementation on combo of uses of **Cl**, **VP**, **Comp**, **SC**.
+3. D2.4 Extraction: SSlash, ClSlash, VPSlash combo: e.g mkVPSlash ( VV VPSlash ) for "want to use (it)"
+4. D2.5 Question and relative clause formation . QCl and RCl
+5. D2.6 Interrogative and relative pronouns for IP, IDet, IAdv, IComp (e.g where or who (is it)), RP
+6. D2.7 Noun phrases and determiners for NP, Det, Quant, Num, Card, Ord
+7. D2.8 Numbers and values
+8. D2.9 Common noun, adjective and adverbs : CN, AP, AdN, AdA, Adv
+9. D2.10 Coordination joining for C = Adv, AP, NP, RS, S
+      1.  Conj [C] gives X, Y and Z
+      2.  C C  gives Y, Z
+      3.  C [C] gives X, Y, Z
+
+10. D3 Lexical Paradigms
+      1. Functions and their types
+         1. For regular words, P315 it is just Str -> Type e.g mkN : Str -> N; mkV : Str -> V etc
+         2. For subcategories P316 there are:
+               1. mkV2 : V -> V2
+               2. mkV2 : V -> Prep -> V2
+               3. mkV3 : V -> V3
+               4. mkV3 : V -> Prep -> Prep -> V3
+               5. mkVQ : V -> VQ
+               6. mkV2Q: V -> Prep -> V2Q
+               7. mkN2 : N -> Prep -> N2
+               8. mkN3 : N -> Prep -> Prep -> N3
+               9. ..etc more on p316
+11. D4 Prelude module for common utilies functions like SS, ss, andB, init, if ..then..else, Bool, optStr
+
+|Oper         |Type                           |Explanation             |
+|---          |---                            |---                     |
+|SS           |Type                           |the type{s : Str}       |
+|ss.          |Str -> SS                      |record from string      |
+|nonExist.    |Str                            |missing form            |
+|optStr       |Str -> Str                     |optional string         |
+|bothWays.    |(x,y : Str) ->Str.             |either x ++ y or y ++ x |
+|Bool         |PType values                   |True and False          |
+|andB.        |(,: Bool) -> Bool              |conjunction.            |
+|orB.         |(,: Bool) -> Bool              |disjunction             |
+|notB         |Bool ->Bool                    |negation                |
+|if then else |(A:Type) -> Bool -> A -> A ->A |conditional.            |
+|init         |Str -> Str                     |drop last character     |
+|last         |Str -> Str                     |return last character   |
+|glue         |Str -> Str -> Str              |glue tokens together.   |
+
+12. D4.2 Formal module for maths precedence, parentheses for subexpressions infixl , usePrec, Prec
+13. D4.3 Symbolic module for functions to change symbols to natural language
+     1. mksymb : Str -> Symb *e.g x*
+     2. symb : Str -> NP *e.g x*
+     3. symb : Int -> NP *e.g 23*
+     4. symb : Det -> N+ -> Numeral -> NP *the level four*
+     5. symb : Symb -> Card *n(number)*
+     6. ..etc more on p317
+14. D4.4 Combinator comule for predicates and function expressions regardless of resource languages.
+     1. pred : A -> NP -> NP -> Cl *e.g x and y are equal*
+     2. pred : A2 -> NP -> NP -> Cl *e.g x is divisible by y*
+     3. pred : N -> NP -> NP -> Cl *e.g x and y are inverses*
+     4. more pred in p317
+     5. app : N2 -> NP -> CN *e.g divisor of x*
+     6. app: N3 -> NP -> NP -> CN *path from x to y*
+     7. more app in p317
+
+
+22. ? ++ vs +
+      1. ++ in [FoodsEng.gf](Chapter04/FoodsEng.gf) lin pred quality , lin  Mod quality kind and lin very a
+      2. + in [ResEng.gf](Chapter04/ResEng.gf) oper flynoun and oper regnoun and [OverloadEng.gf](Chapter04/OverloadEng.gf) oper regVerb and irregVerb
