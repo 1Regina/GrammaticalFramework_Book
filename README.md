@@ -606,6 +606,12 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
      6. app: N3 -> NP -> NP -> CN *path from x to y*
      7. more app in p317
 
+#### E: GF Software Systems
+1.  P320 worthwhile to glance again. run help in gf shell to get a full list of commands and explanations.
+2. ? p320 gr -probs=FILE         -- generate with bias
+3. ? p320 i -v LangEng.gf LangSwe.gf  -- import Eng and Swe, be verbose
+4. E2 GF Batch Compiler: to run GF from a script, use redirection
+      1. $ gf <script.gfs
 
 22. ? ++ vs +
       1. ++ in [FoodsEng.gf](Chapter04/FoodsEng.gf) lin pred quality , lin  Mod quality kind and lin very a
