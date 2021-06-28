@@ -255,7 +255,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 1. p213 Fig 68. variable (is for lhs of equation) and agreement.
 2. 9.6 Determinants p217. lost with the case and agreement part below fig 76. pls walk me over the lin and lincat esp
       `lin DetCN det cn = {s = \\c => det.s ! cn.g ! c ++ cn.s ! det.n ! c ;..... `
-3. ? Compare 9.7 modication has `lincat ap.s and cn.s` per the argument, similar to 9.4 Predication and 9.5 Complication vs 9.5 P216 EXTRA ++
+3. ? Compare 9.7 modication has `lincat ap.s and cn.s` per the argument, similar to 9.4 Predication and 9.5 Complementation vs 9.5 P216 EXTRA ++. (See comments with  -- . Reorganised the features in obvious format.)
       ```
       9.4 p214
       lin
@@ -268,9 +268,19 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       9.7 p218
       lincat
         AP  = {s : Gender => Number => Case => Str             }
-        CN  = {s :           Number => Case => Str ; g : Gender}
+        CN  = {s :           Number => Case => Str ;
+               g : Gender }   ;
        lin
-        AdjCN ap cn = {s = \\n,c => ap.s ! cn.g ! n ! c ++ cn.s ! n ! c ;g = cn.g}
+
+         -- 3 equivalents
+         -- AdjCN ap cn = {s = \\n,c => cn.s ! n ! c ; g=cn.g} ;  --- simplest implementation of cn fn by ignoring the ap part
+         -- AdjCn ap cn = {s = cn.s ; g=cn.g} ;                   --- simplest implementation of cn fn by ignoring the ap part
+         -- AdjCn ap cn = cn ;                                    --- simplest implementation of cn fn by ignoring the ap part
+
+         -- note that n! c! order depends on inflexion order in the lincat of AP and CN
+        AdjCN ap cn = {s = \\n,c => ap.s ! cn.g ! n ! c -- the string we choose from AP. Gender of cn will determine the ap.s to choose.
+                                 ++ cn.s ! n ! c ;      -- the string we choose from CN
+                      g = cn.g}
 
       9.5 p216 EXTRA ++
       lincat
@@ -278,7 +288,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       lin
        ComplV2 v2 vp ={s = \\t,a => v2.s ! t ! a ++ v2.prep ++ np.s ! v2.c}
      ```
-4. ? 9.11 p222 Modiciation and Determination using `oper preOrPost for AdjCN` in Prelude
+4. ? 9.11 p222 Modiciation and Determination using `oper preOrPost for AdjCN` in Prelude for `isPre` feature
 
       ```
          oper preOrPost : Bool -> Str -> Str = \p,a,b ->
@@ -289,9 +299,28 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 
          lin AdjCN cn ap = {
             s = \\n =>
-               preOrPost ap.isPre (ap.s ! cn.g ! n) (cn.s ! n) ;
+               preOrPost ap.isPre (ap.s ! cn.g ! n) (cn.s ! n) ;  -- compare with 9.7 above. Similar.
             g = cn.g
             }
+
+          -- in line version of the above without the oper preOrPost (Alternative 1)
+         lin AdjCN cn ap = {
+            s = \\n =>
+                       case ap.isPre of {
+                                       True  => (ap.s ! cn.g ! n )  ++ (cn.s ! n  ) ;
+                                       False => (cn.s ! n  )        ++ ( ap.s ! cn.g ! n )
+                       } ;
+            g = cn.g
+            }
+
+          -- in line version of the above without the oper preOrPost (Alternative 2)
+         lin AdjCN cn ap = case ap.isPre of {
+                                       True  => {s = \\n => (ap.s ! cn.g ! n )  ++ (cn.s ! n  )         ; g = cn.g };
+                                       False => {s = \\n => (cn.s ! n  )        ++ ( ap.s ! cn.g ! n )  ; g = cn.g };
+                       } ;
+
+
+
       ```
 
 #### Chapter 10
@@ -318,7 +347,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 #### A : mini resource grammar
 1.  __A.2 ResIta__
     1.  ? p250 `param Agr    = Ag Gender Number Person ;`  where is that `Ag` coming/lifted from? NB Agreement is a constituent form that is dependent on other constituents. p259 an inherent feature of one constituent determines a variable feature of another one, e.g. `lin Pred np vp = np.s ++ vp.s ! np.n`.
-    2.  ? `=>` for inherent features and case expressino?
+    2.  ? `=>` for inherent features and case expression?
         1.  p252 `oper adjDet : Adj -> Number -> {s : Gender => Case => Str ; n : Number} = ...` : isnt `=>` for case expression as in `regVerb` above? How/when are `=>` normally used
         2. ? p268 and for inherent features `oper regA : Str -> {s : Gender => Number => Str} = ...`
     3.  ? p257 interface Syntax `oper ... overload` allow for multiple trees for each parser like `mkS` , `mkCl` .
