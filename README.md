@@ -288,7 +288,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       lin
        ComplV2 v2 vp ={s = \\t,a => v2.s ! t ! a ++ v2.prep ++ np.s ! v2.c}
      ```
-4. ? 9.11 p222 Modiciation and Determination using `oper preOrPost for AdjCN` in Prelude for `isPre` feature
+4. ? 9.11 p222 Modiciation and Determination using `oper preOrPost for AdjCN` in Prelude for `isPre` feature. (See -- comment comparison and alternative 1 & 2)
 
       ```
          oper preOrPost : Bool -> Str -> Str = \p,a,b ->
