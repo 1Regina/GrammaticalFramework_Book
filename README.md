@@ -229,6 +229,10 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
         5. `p -lang=Eng "the division of 2 by  10"`
         6. `p -lang=Eng "the division of 2 by  10" |l -treebank`
       5. Run `i -retain CalculatorEng.gf` and `cc arith sum_N`
+      6. Visualise tree is same gf shell
+         1. p "the sum of 12 and 24" | vt | wf -file="mydemo.dot”
+         2. ! dot -Tpng mydemo.dot > mydemo.png    | method 2: go to another shell outside gf and `dot -Tpng mydemo.dot > mydemo.png`
+         3. ! code mydemo.png                      | method 2 continue: `code mydemo.png`
 
 4. ? E8-10 Chapter08/UnixCommand `lin directory path` has type error Str vs {s: Str}. How to provide for a string to be whatever is the input like IO -> StdOut? ({s: Str} is a record and note that Str and string are not the same. To get it interactive, use String literals. See unix.gf fun dir under Paths. String, Float and Int are literals cats hidden under the hood. and they have limited generation see [String literals](https://inariksit.github.io/gf/2018/12/05/literals.html#generation:~:text=4003012203950112767-,Generation)
    1. credit: Maryam ` grep, ls , pipe portion`
