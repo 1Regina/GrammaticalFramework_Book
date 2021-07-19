@@ -4,7 +4,7 @@ abstract Food = {
         Comment ; Item ; Kind ; Quality ; -- ComplexKind ; {-add ComplexKind for unambiguous-}
     fun
         Pron : Item -> Item ;
-        NPred: Item -> Quality -> Comment ; {-negative Pred-}
+        NPredPast, NPredPresentParticiple , NPredPresent: Item -> Quality -> Comment ; {-negative Pred-}
         Pred : Item -> Quality -> Comment ;
         This, That : Kind -> Item ; {-change Kind to ComplexKind so fish can now be complexkind as Kind2C is added-}
         Mod : Quality -> Kind -> Kind ;

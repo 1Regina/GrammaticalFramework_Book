@@ -12,25 +12,27 @@ concrete Food1treeEng of Food = open SyntaxEng, ParadigmsEng in {
         -- NPred item quality = item ++ "isn't" ++ quality ;{-negative Pred-}
         -- Pron r = "it";  -- need to have another external program to instruct it when to use eg after the 3rd pizza
 
-        Pred item quality = mkUtt (mkCl (mkNP item) (mkAP quality));
-        NPred item quality = mkUtt (mkCl (mkNP item) (mkAP quality));  -- item ++ "isn't" ++ quality ;{-negative Pred-}
-        Pron r = i_Pron ;
+        Pred item quality = mkUtt (mkCl (item) (quality)); -- dont need to mkNP item and mkAP quality as item and quality are alr NP and AP per lincat
+        NPredPast item quality = mkUtt (mkS (pastTense) (anteriorAnt) (negativePol) (mkCl (item) (quality)));  -- item ++ "isn't" ++ quality ;{-negative Pred-} --- FROM RGL: mkS (Tense) -> (Ant) -> (Pol) -> Cl -> S
+        NPredPresentParticiple item quality = mkUtt (mkS (anteriorAnt) (negativePol) (mkCl (item) (quality)));
+        NPredPresent item quality = mkUtt (mkS (negativePol) (mkCl (item) (quality)));
+        Pron r = mkNP (it_Pron) ;
         -- This kind = "this" ++ kind ;
         -- That kind = "that" ++ kind ;
-        This item = det this_Det item ;
-        That item = det that_Det item ;
-        Mod quality kind = mkCN (mkAP quality) (mkNP kind) ;
+        This kind = mkNP this_Det kind ;
+        That kind = mkNP that_Det kind ;
+        Mod quality kind = mkCN (quality) (kind) ;
         -- Mod quality kind = quality ++ kind ;
-        -- Wine = "wine" ;
-        -- Cheese = "cheese" ;
-        -- Fish = "fish" ;
-        -- Very quality = "very" ++ quality ;
-        -- Fresh = "fresh" ;
-        -- Warm = "warm" ;
-        -- Italian = "Italian" ;
-        -- Expensive = "expensive" ;
-        -- Delicious = "delicious" ;
-        -- Boring = "boring" ;
+        Wine = mkCN wine ;
+        Cheese = mkCN cheese ;
+        Fish = mkCN fish ;
+        Very quality = very quality;
+        Fresh = mkAP fresh ;
+        Warm = mkAP warm ;
+        Italian = mkAP italian ;
+        Expensive = mkAP expensive ;
+        Delicious = mkAP delicious ;
+        Boring = mkAP boring ;
 
         -- 2.8 ambiguous
         -- With kind1 kind2 = kind1 ++ "with" ++ kind2 ;
@@ -41,31 +43,31 @@ concrete Food1treeEng of Food = open SyntaxEng, ParadigmsEng in {
         oper
 
 
-
-        det_Kind : Det -> NP -> NP ;
-        det_Kind this_that item = mkNP ((mkDet this_that) mkNP item) ;
+        -- det_kind stuff replace by This item and That item already
+        det_Kind : Det -> CN -> NP ;
+        det_Kind this_that kind = mkNP (this_that) kind ;
 
         wine = mkN "wine" ;
         cheese = mkN "cheese" ;
         fish = mkN "fish" ;
 
         very : AP -> AP ;
-        very quality = mkAP (very_AdA quality) ;
+        very quality = mkAP (very_AdA) quality ;
 
-        fresh =  mkAP "fresh" ;
-        warm = mkAP "warm" ;
-        italian = mkAP "Italian" ;
-        expensive = mkAP "expensive" ;
-        delicious = mkAP "delicious" ;
-        boring = mkAP "boring" ;
+        fresh =  mkA "fresh" ;
+        warm = mkA "warm" ;
+        italian = mkA "Italian" ;
+        expensive = mkA "expensive" ;
+        delicious = mkA "delicious" ;
+        boring = mkA "boring" ;
 
-        with : CN -> CN -> NP ;
-        with kind complexkind =
-            let
-                cheese              : CN  = mkCN complexkind                    ;
-                with_chesse         : Adv = SyntaxEng.mkAdv (with_Prep cheese) ;
-                fish_with_cheese    : CN  = mkCN kind with_cheese              ;
-            in mkNP fish_with_cheese  ;           -- fish_with_cheese
+        --with : CN -> CN -> NP ;
+        -- with kind complexkind =
+        --     let
+        --         cheese              : CN  = mkCN complexkind                    ;
+        --         with_chesse         : Adv = SyntaxEng.mkAdv (with_Prep cheese) ;
+        --         fish_with_cheese    : CN  = mkCN kind with_cheese              ;
+        --     in mkNP fish_with_cheese  ;           -- fish_with_cheese
 
 
 }

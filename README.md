@@ -345,8 +345,15 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       NPred (Pron ?1) Warm
       it isn't warm
       ```
-   3. ? Food1treeEng.gf: How to incorp NPred for item ++ "isn't" ++ quality
-   4. ? syntax error upon importing
+   3. ? Food1treeEng.gf: How to incorp NPred for item ++ "isn't" ++ quality. (See different tense forms with `mkS (anteriorAnt) (negativePol)`)
+      ```
+      NPredPast item quality = mkUtt (mkS (pastTense) (anteriorAnt) (negativePol) (mkCl (item) (quality)));
+
+      NPredPresentParticiple item quality = mkUtt (mkS (anteriorAnt) (negativePol) (mkCl (item) (quality)));
+
+      NPredPresent item quality = mkUtt (mkS (negativePol) (mkCl (item) (quality)));
+      ```
+   4. ? syntax error upon importing (fixed. See notes at bottom)
 
 #### A : mini resource grammar
 1.  __A.2 ResIta__
@@ -649,3 +656,10 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 22. ? ++ vs +
       1. ++ in [FoodsEng.gf](Chapter04/FoodsEng.gf) lin pred quality , lin  Mod quality kind and lin very a
       2. + in [ResEng.gf](Chapter04/ResEng.gf) oper flynoun and oper regnoun and [OverloadEng.gf](Chapter04/OverloadEng.gf) oper regVerb and irregVerb
+
+23. #### Chapter 10
+   ##### Tips for Chapter10/Food1treeEng.gf
+   1. `gr -cat=Cl | l -all -treebank`
+   2. Chapter10/Food1treeEng.gf FROM RGL: mkS (Tense) -> (Ant) -> (Pol) -> Cl -> S
+   3. Pred item quality = mkUtt (mkCl (item) (quality)); -- dont need to mkNP item and mkAP quality as item and quality are alr NP and AP per lincat
+   4. after making opers e.g wine = mkN "wine" ; i still need to tackle linearization in lin section by Wine = mkCN wine ie Wine = mkCN (mkN "wine")
