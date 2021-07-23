@@ -15,9 +15,9 @@ concrete FoodsEng of Foods = {
         Cheese = regNoun "cheese" ;
         Fish = noun "fish" "fish" ;
         Pizza = regNoun "pizza" ;
-        
+
         -- Ex3-2
-        Fly = flynoun "fly" "flies"; 
+        Fly = flynoun "fly" "flies";
 
         Very a = {s = "very" ++ a.s} ;
         Fresh = adj "fresh" ;
@@ -36,26 +36,26 @@ concrete FoodsEng of Foods = {
             \man,men -> {s = table {Sg => man ; Pl => men}} ;
 
         --Ex 3-2
-        flynoun : Str  -> {s : Number => Str} = 
+        flynoun : Str  -> {s : Number => Str} =
             \fly ->
-            
+
             let flies : Str = case fly of {
                fl + "y"        => fl + "ies";
-               _               => fly + "s"     
+               _               => fly + "s"
             }
-                 
+
             in {s = table { Sg => fly; Pl => flies}};
         --Ex 3-2 alternative with given param Number and oper noun
         {-Noun : Type = { s: Number => Str};
         mkNoun : Str -> Str -> Noun = \x, y ->
-            { s = 
+            { s =
                 table {
-                    Sg  => x ; 
+                    Sg  => x ;
                     Pl  => y
                     }
             };
 
-        -}    
+        -}
 
         regNoun : Str -> {s : Number => Str} =
             \car -> noun car (car + "s") ;
