@@ -1,6 +1,6 @@
 concrete FoodEng of Food =  {
     lincat
-        Comment, Item, Kind, Quality = Str ; {-add ComplexKind for unambiguous-}
+        Comment, Item, Kind, Quality, ComplexKind = Str ; {-add ComplexKind for unambiguous-}
     lin
         Pred item quality = item ++ "is" ++ quality ;
         NPred item quality = item ++ "isn't" ++ quality ;{-negative Pred-}
@@ -19,8 +19,8 @@ concrete FoodEng of Food =  {
         Delicious = "delicious" ;
         Boring = "boring" ;
         -- 2.8 ambiguous
-        With kind1 kind2 = kind1 ++ "with" ++ kind2 ;
+        -- With kind1 kind2 = kind1 ++ "with" ++ kind2 ;
         --2.8 unambiguous"
-        -- With kind complexkind = kind ++ "with" ++ complexkind;
-        -- Kind2C kind = kind;
-}
+        With kind complexkind = kind ++ "with" ++ complexkind;
+        Kind2C kind = kind;
+    }

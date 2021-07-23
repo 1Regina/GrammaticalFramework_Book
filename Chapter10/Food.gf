@@ -1,19 +1,19 @@
 abstract Food = {
     flags startcat = Comment ;
     cat
-        Comment ; Item ; Kind ; Quality ; -- ComplexKind ; {-add ComplexKind for unambiguous-}
+        Comment ; Item ; Kind ; Quality ;  ComplexKind ; {-add ComplexKind for unambiguous-}
     fun
         Pron : Item -> Item ;
-        NPredPast, NPredPresentParticiple , NPredPresent: Item -> Quality -> Comment ; {-negative Pred-}
+        NPred: Item -> Quality -> Comment ; {-negative Pred-}
         Pred : Item -> Quality -> Comment ;
-        This, That : Kind -> Item ; {-change Kind to ComplexKind so fish can now be complexkind as Kind2C is added-}
+        This, That : ComplexKind -> Item; {-change Kind to ComplexKind so fish can now be complexkind as Kind2C is added-}
         Mod : Quality -> Kind -> Kind ;
         Wine, Cheese, Fish : Kind ;
         Very : Quality -> Quality ;
         Fresh, Warm, Italian, Expensive, Delicious, Boring : Quality ;
         -- 2.8 ambiguous
-        With : Kind -> Kind -> Kind ;
+        -- With : Kind -> Kind -> Kind ;
         -- -- 2.8 unambiguous
-        -- With : Kind -> ComplexKind -> ComplexKind;
-        -- Kind2C : Kind -> ComplexKind;
+        With : Kind -> ComplexKind -> ComplexKind;
+        Kind2C : Kind -> ComplexKind;
 }
