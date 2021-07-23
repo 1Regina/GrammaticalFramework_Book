@@ -1,4 +1,4 @@
-concrete Food1treeEng of Food = open SyntaxEng, ParadigmsEng in {
+concrete Food1treeEng of Food1tree = open SyntaxEng, ParadigmsEng in {
     lincat
         -- Comment, Item, Kind, Quality = Str ; {-add ComplexKind for unambiguous-}
         Comment              = Utt;
@@ -38,14 +38,15 @@ concrete Food1treeEng of Food = open SyntaxEng, ParadigmsEng in {
         -- With kind1 kind2 = kind1 ++ "with" ++ kind2 ;
         --2.8 unambiguous"
         -- With kind complexkind = kind ++ "with" ++ complexkind;
+        With kind complexKind = mkCN ((mkCN complexKind))  ((with_Prep) (mkCN kind)) ;
         Kind2C kind = kind;
 
         oper
 
 
         -- det_kind stuff replace by This item and That item already
-        det_Kind : Det -> CN -> NP ;
-        det_Kind this_that kind = mkNP (this_that) kind ;
+        -- det_Kind : Det -> CN -> NP ;
+        -- det_Kind this_that kind = mkNP (this_that) kind ;
 
         wine = mkN "wine" ;
         cheese = mkN "cheese" ;
@@ -61,12 +62,12 @@ concrete Food1treeEng of Food = open SyntaxEng, ParadigmsEng in {
         delicious = mkA "delicious" ;
         boring = mkA "boring" ;
 
-        --with : CN -> CN -> NP ;
+        -- with : CN -> CN -> NP ;
         -- with kind complexkind =
         --     let
-        --         cheese              : CN  = mkCN complexkind                    ;
+        --         cheese              : CN  = mkCN kind                    ;
         --         with_chesse         : Adv = SyntaxEng.mkAdv (with_Prep cheese) ;
-        --         fish_with_cheese    : CN  = mkCN kind with_cheese              ;
+        --         fish_with_cheese    : CN  = mkCN complexkind with_cheese    ;
         --     in mkNP fish_with_cheese  ;           -- fish_with_cheese
 
 
