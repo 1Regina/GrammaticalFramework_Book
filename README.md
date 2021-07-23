@@ -62,7 +62,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 2. Ex 3.2
    test inflection table with param and oper
    1.  `i -retain FoodsEng.gf`  then `compute_concrete (regNoun "wine").s ! Pl`
-   2.  `compute_concrete (noun "fish" "fish").ßs ! Pl`
+   2.  `compute_concrete (noun "fish" "fish").s ! Pl`
    3.  `cc flynoun "fly"` to see the transformation
    4.  `l -table Wine`
    5.  `gf FoodsEng.gf`
@@ -354,6 +354,20 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       NPredPresent item quality = mkUtt (mkS (negativePol) (mkCl (item) (quality)));
       ```
    4. ? syntax error upon importing (fixed. See notes at bottom)
+   5. Test after import
+      ```
+      Food> p "it hasn't been boring"
+      NPredPresentParticiple (Pron ?1) Boring
+
+      Food> gr NPredPresentParticiple (Pron ?1) ? | l -treebank
+      Food: NPredPresentParticiple (Pron (That Fish)) Expensive
+      Food1treeEng: it hasn't been expensive
+
+      Food> gr NPredPresent (This (Mod Italian Fish)) (Very Italian) | l
+      this Italian fish isn't very Italian
+      ```
+   6. ? Food1treeEng.gf cant import after adding disambiguous with kind complexKind. Aim to be able to `p "this delicious fish with cheese is expensive"` ERROR is ** Maybe you gave too many arguments to with_Prep + syntax error. Should i do --2.8 unambiguous" way or the bottom oper way
+   7. Ch 03. other than cc and retain, how can i do "p "these cakes are expensive" or to make use of fly
 
 #### A : mini resource grammar
 1.  __A.2 ResIta__
@@ -660,6 +674,6 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 23. #### Chapter 10
    ##### Tips for Chapter10/Food1treeEng.gf
    1. `gr -cat=Cl | l -all -treebank`
-   2. Chapter10/Food1treeEng.gf FROM RGL: mkS (Tense) -> (Ant) -> (Pol) -> Cl -> S
+   2. For tense and polarity sensitive sentences. Chapter10/Food1treeEng.gf FROM RGL: mkS (Tense) -> (Ant) -> (Pol) -> Cl -> S
    3. Pred item quality = mkUtt (mkCl (item) (quality)); -- dont need to mkNP item and mkAP quality as item and quality are alr NP and AP per lincat
    4. after making opers e.g wine = mkN "wine" ; i still need to tackle linearization in lin section by Wine = mkCN wine ie Wine = mkCN (mkN "wine")
