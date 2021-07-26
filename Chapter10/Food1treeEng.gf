@@ -74,8 +74,8 @@ concrete Food1treeEng of Food1tree = open SyntaxEng, ParadigmsEng in {
         with_ : CN -> CN -> CN = \cheese,complexkind ->
             let
                 with_cheese         : Adv = SyntaxEng.mkAdv with_Prep (mkNP cheese) ;
-                fish_with_cheese    : CN  = mkCN <complexkind : CN> <with_cheese : Adv>    ;
-            in fish_with_cheese  ;           -- fish_with_cheese
+                fish_with_cheese    : CN  = mkCN <complexkind : CN> <with_cheese : Adv> ;
+            in fish_with_cheese  ;  -- CN -> Adv -> CN
 
 
 }
