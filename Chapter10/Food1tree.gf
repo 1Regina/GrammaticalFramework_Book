@@ -6,14 +6,16 @@ abstract Food1tree = {
         Pron : Item -> Item ;
         NPredPast, NPredPresentParticiple , NPredPresent: Item -> Quality -> Comment ; {-negative Pred-}
         Pred : Item -> Quality -> Comment ;
-        This, That : Kind -> Item ; {-change Kind to ComplexKind so fish can now be complexkind as Kind2C is added-}
+        This, That :  ComplexKind -> Item ; {- change Kind to ComplexKind so fish can now be complexkind as Kind2C is added for Kind -} -- otherwise just Kind -> Item
         Mod : Quality -> Kind -> Kind ;
         Wine, Cheese, Fish : Kind ;
         Very : Quality -> Quality ;
         Fresh, Warm, Italian, Expensive, Delicious, Boring : Quality ;
         -- 2.8 ambiguous
         -- With : Kind -> Kind -> Kind ;
-        -- -- 2.8 unambiguous
+
+        -- 2.8 unambiguous
         With : Kind -> ComplexKind -> ComplexKind;
+
         Kind2C : Kind -> ComplexKind;
 }

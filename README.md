@@ -76,6 +76,9 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 4. Cannot `i FoodsIta.gf` even though they are copied from textbook. (Bcos ResIta shows that noun also need a gender. Fixed by adding `g = masc` in FoodsIta.gf to `wine`)
 5. Can we walk thru the oper meaning in ResIta.gf. P90. Dont understand why `(nero,nera,neri,nere : Str) -> Adjective = `  can be wildcard since they are used again. (Explanation: ResIta line 24 can be wildcard `n1,_,_,n4` or as it is to make it clearer see Function Types with Variable in [tutorial](http://www.grammaticalframework.org/doc/tutorial/gf-tutorial.html#toc60) but the line 25 should be named.)
 6. desugar of `Very qual` in FoodsIta. correct? (Fixed. need to add another nested table. See extra alternative)
+7. ?Ch 03. other than cc and retain, how can i do "p "these cakes are expensive" or to make use of flyNoun or regNoun opers. (See https://inariksit.github.io/gf/2018/08/28/gf-gotchas.html#:~:text=sense.-,re-export%20rgl%20opers%20in%20application%20grammar,-Here) Solution:
+      1. Run `i -retain ../Chapter03/FoodsEng.gf` then `cc -one Pred (These (regNoun "cake with cheese")) (adj "pink")` to get "these cake with cheeses are pink"
+      2. `i -retain FoodsEng.gf` then `cc -one Pred (These (flyNoun "candy")) (adj "tasty")` to get `these candies are tasty`
 
 #### Chapter 04
 * << Resource Grammar and overload. Prefix and Grammars extension >>
@@ -366,8 +369,10 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       Food> gr NPredPresent (This (Mod Italian Fish)) (Very Italian) | l
       this Italian fish isn't very Italian
       ```
-   6. ? Food1treeEng.gf cant import after adding disambiguous with kind complexKind. Aim to be able to `p "this delicious fish with cheese is expensive"` ERROR is ** Maybe you gave too many arguments to with_Prep + syntax error. Should i do --2.8 unambiguous" way or the bottom oper way
-   7. Ch 03. other than cc and retain, how can i do "p "these cakes are expensive" or to make use of fly
+   6. ? Food1treeEng.gf cant import after adding disambiguous with kind complexKind. Aim to be able to `p "this delicious fish with cheese is expensive"` ERROR is ** Maybe you gave too many arguments to with_Prep + syntax error. Should i do --2.8 unambiguous" way or the bottom oper way (Fixed for 2.8 unambiguous (Method a) without oper with_ by Abstract This, That, With & Kind2C and Concrete lincat ComplexKind, lin With kind complexKind, oper Kind2C kind and (Method b) Abstract This, That, With & Kind2C and Concrete lincat ComplexKind, lin With = with_ , Kind2C kind using oper with_   )
+   1. ?Ch 03. other than cc and retain, how can i do "p "these cakes are expensive" or to make use of fly. (See https://inariksit.github.io/gf/2018/08/28/gf-gotchas.html#:~:text=sense.-,re-export%20rgl%20opers%20in%20application%20grammar,-Here) Solution:
+      1. Run `i -retain ../Chapter03/FoodsEng.gf` then `cc -one Pred (These (regNoun "cake with cheese")) (adj "pink")` to get "these cake with cheeses are pink"
+      2. `i -retain FoodsEng.gf` then `cc -one Pred (These (flyNoun "candy")) (adj "tasty")` to get `these candies are tasty`
 
 #### A : mini resource grammar
 1.  __A.2 ResIta__

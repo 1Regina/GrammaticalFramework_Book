@@ -38,7 +38,14 @@ concrete Food1treeEng of Food1tree = open SyntaxEng, ParadigmsEng in {
         -- With kind1 kind2 = kind1 ++ "with" ++ kind2 ;
         --2.8 unambiguous"
         -- With kind complexkind = kind ++ "with" ++ complexkind;
-        With kind complexKind = mkCN ((mkCN complexKind))  ((with_Prep) (mkCN kind)) ;
+
+        -- 2.8 unambiguous (Method a) without oper with_
+        -- With kind complexKind =
+        --      mkCN (complexKind) -- CN
+        --           (SyntaxEng.mkAdv with_Prep (mkNP kind)) ; --Adv
+        -- 2.8 unambiguous (Method b) using oper with_
+        With = with_ ;
+
         Kind2C kind = kind;
 
         oper
@@ -62,13 +69,13 @@ concrete Food1treeEng of Food1tree = open SyntaxEng, ParadigmsEng in {
         delicious = mkA "delicious" ;
         boring = mkA "boring" ;
 
-        -- with : CN -> CN -> NP ;
-        -- with kind complexkind =
-        --     let
-        --         cheese              : CN  = mkCN kind                    ;
-        --         with_chesse         : Adv = SyntaxEng.mkAdv (with_Prep cheese) ;
-        --         fish_with_cheese    : CN  = mkCN complexkind with_cheese    ;
-        --     in mkNP fish_with_cheese  ;           -- fish_with_cheese
+
+        -- 2.8 unambiguous (Method b) using oper with_
+        with_ : CN -> CN -> CN = \cheese,complexkind ->
+            let
+                with_cheese         : Adv = SyntaxEng.mkAdv with_Prep (mkNP cheese) ;
+                fish_with_cheese    : CN  = mkCN <complexkind : CN> <with_cheese : Adv>    ;
+            in fish_with_cheese  ;           -- fish_with_cheese
 
 
 }
