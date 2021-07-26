@@ -17,7 +17,7 @@ concrete FoodsEng of Foods = {
         Pizza = regNoun "pizza" ;
 
         -- Ex3-2
-        Fly = flynoun "fly" "flies";
+        Fly = flyNoun "fly" "flies";
 
         Very a = {s = "very" ++ a.s} ;
         Fresh = adj "fresh" ;
@@ -36,7 +36,7 @@ concrete FoodsEng of Foods = {
             \man,men -> {s = table {Sg => man ; Pl => men}} ;
 
         --Ex 3-2
-        flynoun : Str  -> {s : Number => Str} =
+        flyNoun : Str  -> {s : Number => Str} =
             \fly ->
 
             let flies : Str = case fly of {
@@ -63,4 +63,6 @@ concrete FoodsEng of Foods = {
             \cold -> {s = cold} ;
         copula : Number => Str =
             table {Sg => "is" ; Pl => "are"} ;
+
+
 }
