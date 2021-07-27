@@ -678,7 +678,21 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 
 23. #### Chapter 10
    ##### Tips for Chapter10/Food1treeEng.gf
-   1. `gr -cat=Cl | l -all -treebank`
+   1. `gr -cat=Cl | l -all -treebank` give linearizations n treebanks of all Cat = Cl
    2. For tense and polarity sensitive sentences. Chapter10/Food1treeEng.gf FROM RGL: mkS (Tense) -> (Ant) -> (Pol) -> Cl -> S
    3. Pred item quality = mkUtt (mkCl (item) (quality)); -- dont need to mkNP item and mkAP quality as item and quality are alr NP and AP per lincat
    4. after making opers e.g wine = mkN "wine" ; i still need to tackle linearization in lin section by Wine = mkCN wine ie Wine = mkCN (mkN "wine")
+24. #### GFSS
+   5. `abstract_info VP` gives all the fun that produce a VP
+   6. `l -all i_Pron` to see all the inflextion table contents in i_Pron
+   7. forming phrases by extracting the inherent features of different arg to make things coherent
+      ```
+      lincat
+      ChangingCat = {
+               beforeChangingPart , afterChangingPart : Str ;
+               changingPart: Foo => Bar => Str   };
+
+      lin
+      -- fix : ChangingCat -> AffectingCat -> FixedCat
+      fix ch af = { s = ch.beforeChangingPart ++ ch.changingingPart!af.foo!af.bar ++ ch.afterChangingPart };
+      ```
