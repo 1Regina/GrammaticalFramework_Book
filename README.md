@@ -370,17 +370,35 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       this Italian fish isn't very Italian
       ```
    6. ? Food1treeEng.gf cant import after adding disambiguous with kind complexKind. Aim to be able to `p "this delicious fish with cheese is expensive"` ERROR is ** Maybe you gave too many arguments to with_Prep + syntax error. Should i do --2.8 unambiguous" way or the bottom oper way (Fixed for 2.8 unambiguous (Method a) without oper with_ by Abstract This, That, With & Kind2C and Concrete lincat ComplexKind, lin With kind complexKind, oper Kind2C kind and (Method b) Abstract This, That, With & Kind2C and Concrete lincat ComplexKind, lin With = with_ , Kind2C kind using oper with_   )
-   1. ?Ch 03. other than cc and retain, how can i do "p "these cakes are expensive" or to make use of fly. (See https://inariksit.github.io/gf/2018/08/28/gf-gotchas.html#:~:text=sense.-,re-export%20rgl%20opers%20in%20application%20grammar,-Here) Solution:
+   7. ?Ch 03. other than cc and retain, how can i do "p "these cakes are expensive" or to make use of fly. (See https://inariksit.github.io/gf/2018/08/28/gf-gotchas.html#:~:text=sense.-,re-export%20rgl%20opers%20in%20application%20grammar,-Here) Solution:
       1. Run `i -retain ../Chapter03/FoodsEng.gf` then `cc -one Pred (These (regNoun "cake with cheese")) (adj "pink")` to get "these cake with cheeses are pink"
       2. `i -retain FoodsEng.gf` then `cc -one Pred (These (flyNoun "candy")) (adj "tasty")` to get `these candies are tasty`
 
 #### A : mini resource grammar
 1.  __A.2 ResIta__
-    1.  ? p250 `param Agr    = Ag Gender Number Person ;`  where is that `Ag` coming/lifted from? NB Agreement is a constituent form that is dependent on other constituents. p259 an inherent feature of one constituent determines a variable feature of another one, e.g. `lin Pred np vp = np.s ++ vp.s ! np.n`.
-    2.  ? `=>` for inherent features and case expression?
-        1.  p252 `oper adjDet : Adj -> Number -> {s : Gender => Case => Str ; n : Number} = ...` : isnt `=>` for case expression as in `regVerb` above? How/when are `=>` normally used
+    1.  ? p250 `param Agr    = Ag Gender Number Person ;`  where is that `Ag` coming/lifted from? (It is just a type constructor) NB Agreement is a constituent form that is dependent on other constituents. p259 an inherent feature of one constituent determines a variable feature of another one, e.g. `lin Pred np vp = np.s ++ vp.s ! np.n`.(e.g the cats sleep vs the cat sleeps)
+    2.  ? `=>` for inherent features and case expression? (`=>` is for table and case expressions)
+        1.  p252 `oper adjDet : Adj -> Number -> {s : Gender => Case => Str ; n : Number} = ...` : isnt `=>` for case expression as in `regVerb` above? How/when are `=>` normally used.
+            1.  Ans: (for table and case: `=>` can be used inside or outside a record. For outside then inside .g GFSS reflPron : Agr => Str = table { P1 Sg => "myself" ; P1 PL = "ourselves"};)
         2. ? p268 and for inherent features `oper regA : Str -> {s : Gender => Number => Str} = ...`
-    3.  ? p257 interface Syntax `oper ... overload` allow for multiple trees for each parser like `mkS` , `mkCl` .
+           1. Ans: ( In  regA : Str -> {s : Gender => Number => Str} =.. , it would be first the gender table and next the number table determines the Str)
+           ```
+           param Gender = Masc | Fem ;
+           oper
+            regA : Str -> {s : Gender => Number => Str} =
+               \fin -> {s = table {
+                  Masc => table {
+                                 Sg => fin ;
+                                 Pl => fin + "s"
+                                 } ;
+                  Fem => table {
+                                 Sg => fin + "e" ;
+                                 Pl => fin + "es"
+                                 }
+                                 }} ;
+
+           ```
+    3.  ? p257 interface Syntax `oper ... overload` allow for multiple trees for each parser like `mkS` , `mkCl` . (Yes the overload creates the different paths for creating the opers e.g. 3 for mkS and 5 for mkCl)
 
 #### B: Linguistic terms glossary
 1.  Read them!
@@ -417,6 +435,8 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
                         Masc => table {Sg => fin       ; Pl => fin + "s"} ;
                         Fem  => table {Sg => fin + "e" ; Pl => fin + "es"}
                                  }} ;
+
+      (Ans: 1st decide the gender then 2nd the Sg / Pl )
       ```
 3. C2.5: Modules and their extends and opens types
 
@@ -683,7 +703,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
    3. Pred item quality = mkUtt (mkCl (item) (quality)); -- dont need to mkNP item and mkAP quality as item and quality are alr NP and AP per lincat
    4. after making opers e.g wine = mkN "wine" ; i still need to tackle linearization in lin section by Wine = mkCN wine ie Wine = mkCN (mkN "wine")
 24. #### GFSS
-   5. `abstract_info VP` gives all the fun that produce a VP
+   5. `abstract_info VP` gives all the fun that produce a VP. similar `ai eat_V2` for eat and its probability
    6. `l -all i_Pron` to see all the inflextion table contents in i_Pron
    7. forming phrases by extracting the inherent features of different arg to make things coherent
       ```
@@ -696,3 +716,8 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       -- fix : ChangingCat -> AffectingCat -> FixedCat
       fix ch af = { s = ch.beforeChangingPart ++ ch.changingingPart!af.foo!af.bar ++ ch.afterChangingPart };
       ```
+   8. ` l -all eat_V2` to get all linearization of eat ie eat eats eat. `l -all ReflV2 love_V2`
+   9. test
+      1. `gf --run < corpus.gfs` where corpus.gfs contains the commands
+      2. `gf --run < corpus.gfs > corpus.GOLD` which contains the results of the commands in corpus.gfs
+      3. `gf --run < corpus.gfs | diff -u - corpus.GOLD` to compare results
