@@ -703,9 +703,9 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
    3. Pred item quality = mkUtt (mkCl (item) (quality)); -- dont need to mkNP item and mkAP quality as item and quality are alr NP and AP per lincat
    4. after making opers e.g wine = mkN "wine" ; i still need to tackle linearization in lin section by Wine = mkCN wine ie Wine = mkCN (mkN "wine")
 24. #### GFSS
-   5. `abstract_info VP` gives all the fun that produce a VP. similar `ai eat_V2` for eat and its probability
-   6. `l -all i_Pron` to see all the inflextion table contents in i_Pron
-   7. forming phrases by extracting the inherent features of different arg to make things coherent
+   1. `abstract_info VP` gives all the fun that produce a VP. similar `ai eat_V2` for eat and its probability
+   2. `l -all i_Pron` to see all the inflextion table contents in i_Pron
+   3. forming phrases by extracting the inherent features of different arg to make things coherent
       ```
       lincat
       ChangingCat = {
@@ -716,8 +716,13 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       -- fix : ChangingCat -> AffectingCat -> FixedCat
       fix ch af = { s = ch.beforeChangingPart ++ ch.changingingPart!af.foo!af.bar ++ ch.afterChangingPart };
       ```
-   8. ` l -all eat_V2` to get all linearization of eat ie eat eats eat. `l -all ReflV2 love_V2`
-   9. test
+   4. ` l -all eat_V2` to get all linearization of eat ie eat eats eat. `l -all ReflV2 love_V2`
+   5. test
       1. `gf --run < corpus.gfs` where corpus.gfs contains the commands
       2. `gf --run < corpus.gfs > corpus.GOLD` which contains the results of the commands in corpus.gfs
       3. `gf --run < corpus.gfs | diff -u - corpus.GOLD` to compare results
+   6. In code/GFSummerSchool/Singlish/Version0/SinglishEngOrg.gf hack to change a subcategory V2 to a V to use the RGL. `(mkVP <action : V> )`
+   ```
+      -- : Actor -> Action -> Pred  ;
+    PersonAction actor action            = mkS(mkCl (mkNP actor) (mkVP <action : V> )) ; -- hack to force a sub-category action: V2 into a higher category
+    ```
