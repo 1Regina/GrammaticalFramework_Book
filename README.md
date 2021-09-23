@@ -178,7 +178,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 
 #### Chapter08
 * << Arithmetic and Interface for formal and natural language. Calculator and Unix commands >>
-1. ? `p " 2 + 3 * 4"` and `p -cat=Exp "2+3*4"` did not return parser altho linking ok for Calculator.gf (Need a concrete. With abstract, I can only do gt and gr. `import CalculatorC.gf` instead and do `p " 2 + 3 * 4"` , `put_string -lexcode "2+3*4"` and `put_string -lexcode "2+3*4"|p ` ).
+1. ? `p "2 + 3 * 4"` and `p -cat=Exp "2 + 3 * 4"` did not return parser altho linking ok for Calculator.gf (Need a concrete. With abstract, I can only do gt and gr. `import CalculatorC.gf` instead and do `p "2 + 3 * 4"` , `put_string -lexcode "2 + 3 * 4"` and `put_string -lexcode "2 + 3 * 4"|p ` ).
 2. CalculatorC.gf
     1. ? Ex 8-0  `infixl`, `p = Type Prec` , `f = Type Str`, `x, y = Type TermPrec` and `EPlus ... EInt  = Type Str`. (See [Prelude Formal](http://www.grammaticalframework.org/~john/rgl-browser/#!prelude/Formal) to understand how they work)
     2. ? Ex 8-0 Dont we need to know whats `nextPrec` and `lessPrec` (See [Prelude Formal](http://www.grammaticalframework.org/~john/rgl-browser/#!prelude/Formal))
