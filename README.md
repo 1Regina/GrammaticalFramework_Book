@@ -1,4 +1,12 @@
 Notes and Exercises to Grammatical FrameworkA Programming Language for Multilingual Grammars and Their Applications by Aarne Ranta September 8, 2010
+#### WordNet, RGL and gf_lib_path
+1. When getting errors in every single A, N, or V in grammar, it can be a mismatch of the versions of RGL, wordnet and your grammars. There may be old *.gfo files lying around, even though you'd do make install from the latest gf-rgl. Better to just nuke everything in my $GF_LIB_PATH and do a fresh install.
+1. `git pull gf-rgl`
+2. `git pull gf-wordnet`
+3. empty contents in gf_lib_path/
+4. In gf-rgl: `make install`
+5. In gf-wordnet: if I really want every language, then I can do make install there too, but it is slow. If I only need English, then I do this: `gf --gfo-dir=$GF_LIB_PATH WordNetEng.gf`
+
 
 #### Chapter 02
 
