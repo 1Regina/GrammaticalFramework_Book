@@ -330,11 +330,14 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
 
           -- in line version of the above without the oper preOrPost (Alternative 2)
          lin AdjCN cn ap = case ap.isPre of {
-                                       True  => {s = \\n => (ap.s ! cn.g ! n )  ++ (cn.s ! n  )         ; g = cn.g };
-                                       False => {s = \\n => (cn.s ! n  )        ++ ( ap.s ! cn.g ! n )  ; g = cn.g };
+                                       True  => {s = \\n => (ap.s ! cn.g ! n )  ++ (cn.s ! n  )         ; g = cn.g }; -- think of nesting + inherent feature
+                                       False => {s = \\n => (cn.s ! n  )        ++ ( ap.s ! cn.g ! n )  ; g = cn.g }; -- think of nesting + inherent feature
                        } ;
 
 
+         Note:
+          1.  `!` means choose. e.g cn.g!number means need to decide if singular or plural bcos number is the variable as `number =>` would have been on the left hand side. So the inflexion table would have a singular n a plural "option" for this cn.g
+          2.  whereas the `.g` in `cn.g` means gender inherent in the `cn`
 
       ```
 
