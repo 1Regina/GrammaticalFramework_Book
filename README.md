@@ -541,10 +541,21 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
          1. both R and S are either records or record types
          2. the labels in R and S are distinct.
 15. C4.11 [Subtyping](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html)
-      1. A is a subtype of B means that a : A implies a : B.
-      2. covariance: if A is a subtype of B, then C -> A is a subtype of C -> B.
-      3. contravariance: if A is a subtype of B, then B -> C is a subtype of A -> C
-      4. transitive: if A is a subtype of B and B is a subtype of C, then A is a subtype of C.
+      1. ~~A is a subtype of B means that a : A implies a : B.~~
+      2. ~~covariance: if A is a subtype of B, then C -> A is a subtype of C -> B.~~
+      3. ~~contravariance: if A is a subtype of B, then B -> C is a subtype of A -> C~~
+      4. ~~transitive: if A is a subtype of B and B is a subtype of C, then A is a subtype of C.~~
+      4. Example with Andreas: A is a subtype of B written as `A <: B` if A can be converted to B ie. this means you can upcast: A -> B. Another way to look at it is A is more narrowly-defined than B + has more than all the properties of B
+      ```
+         A = {a , b ,c} -- where A is defined by properties a , b and c
+         B = { a, c}
+         This means we can upcast {a, b, c} = {a, c}
+      ```
+      5. On the other hand, A' is **NOT** a subtype of B' as B' has more properties than A' eg the `d`.
+      ```
+         A' = { a, b, c}
+         B' = { a, c, d}
+      ```
 16. C4.12 Tables aka finite functions because could finitely enumerate all argument-value pairs.
       1. V1,. . . ,Vn is the complete list of the parameter values of the argument type P, and each ti is an expression of the value type T.
          > table { V1 => t1; . . . ;Vn => tn}
