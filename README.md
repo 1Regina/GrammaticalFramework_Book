@@ -540,7 +540,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
       7. Record extension with R ** S produces a record with union of fields of R and S. It requires:
          1. both R and S are either records or record types
          2. the labels in R and S are distinct.
-15. C4.11 [Subtyping](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html)
+15. C4.11 [Subtyping](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html) and [Lock Fields](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html#:~:text=When%20you%20write,Further%20reading) being hidden fields in compiler that we don't see.
       1. ~~A is a subtype of B means that a : A implies a : B.~~
       2. ~~covariance: if A is a subtype of B, then C -> A is a subtype of C -> B.~~
       3. ~~contravariance: if A is a subtype of B, then B -> C is a subtype of A -> C~~
@@ -556,6 +556,7 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
          A' = { a, b, c}
          B' = { a, c, d}
       ```
+      6. [SubType in another action example -- See Interlude 2 at bottom](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html#:~:text=c2%20%3D%20prep%7D%20--%20%3A%20N2-,interlude%202,-Now%20we%20get)
 16. C4.12 Tables aka finite functions because could finitely enumerate all argument-value pairs.
       1. V1,. . . ,Vn is the complete list of the parameter values of the argument type P, and each ti is an expression of the value type T.
          > table { V1 => t1; . . . ;Vn => tn}
