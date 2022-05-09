@@ -557,6 +557,19 @@ Notes and Exercises to Grammatical FrameworkA Programming Language for Multiling
          B' = { a, c, d}
       ```
       6. [SubType in another action example -- See Interlude 2 at bottom](https://inariksit.github.io/gf/2018/05/25/subtyping-gf.html#:~:text=c2%20%3D%20prep%7D%20--%20%3A%20N2-,interlude%202,-Now%20we%20get)
+      * subtype relations hold between Det ⁇ Idet and NP ⁇ IP (other than =)?
+      ```
+         lin
+         -- : Det -> CN -> NP          -- the songs
+         DetCN det cn = {- actual implementation here -} ;
+
+         -- : IDet -> CN -> IP ;       -- which five songs
+         IdetCN = DetCN ;
+      ```
+      We can give an Idet as an argument to DetCN, which expects a Det. Thus Idet has to have more fields than Det.
+      We can return an NP as the result of IdetCN, which expects to return an IP. Thus NP has to have more fields than IP.
+      Here we have the answer: IDet <: Det (ie. IDet is a subType of Det) and NP <: IP (ie. NP is a subtype of IP).
+
 16. C4.12 Tables aka finite functions because could finitely enumerate all argument-value pairs.
       1. V1,. . . ,Vn is the complete list of the parameter values of the argument type P, and each ti is an expression of the value type T.
          > table { V1 => t1; . . . ;Vn => tn}
