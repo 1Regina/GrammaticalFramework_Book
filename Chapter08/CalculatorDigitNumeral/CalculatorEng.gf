@@ -3,15 +3,15 @@ concrete CalculatorEng of Calculator = open SyntaxEng, ParadigmsEng, SymbolicEng
 
     lincat
         -- case 1: with Str without oper
-        Exp = Str;
+        -- Exp = Str;
 
         -- case 2: using NP and oper
-        -- Exp = NP ;
+        Exp = NP ;
 
     lin
 
 -- case 1:
-
+{-
         -- Exp -> Exp -> Exp
         EPlus e1 e2 = "the sum of" ++ e1 ++ "and" ++ e2 ;
         EMinus e1 e2 = "the difference of" ++ e1 ++ "and" ++ e2 ;
@@ -19,10 +19,10 @@ concrete CalculatorEng of Calculator = open SyntaxEng, ParadigmsEng, SymbolicEng
         EDiv e1 e2 = "the division of" ++ e1 ++ "by" ++ e2 ;
 
         EInt numeral = numeral.s ;
-
+-}
 
 -- case 2:
-{-
+
         -- Exp -> Exp -> Exp
         EPlus e1 e2 = arith sum_N e1 e2 ;
         EMinus e1 e2 = arith difference_N e1 e2 ;
@@ -55,5 +55,5 @@ concrete CalculatorEng of Calculator = open SyntaxEng, ParadigmsEng, SymbolicEng
                 division_of_e1_by_e2    : CN        = mkCN op_Div of_e1_by_e2               ;
             in mkNP the_Det division_of_e1_by_e2                                            ; -- the_division_of_e1_by_e2
 
--}
+
 }
